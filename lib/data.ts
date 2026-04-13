@@ -1,57 +1,39 @@
 export const services = [
   {
     id: "01",
-    title: "Branding Estratégico",
+    title: "Producción Audiovisual y Fotografía",
     description:
-      "Naming, logotipo, línea gráfica, tono de voz, diseño de papelería y manual de identidad. Te damos una marca lista para crecer.",
-    tags: ["Identidad", "Diseño", "Estrategia"],
-    color: "#C4956A",
-    video: "/videos/branding.mp4",
+      "El mejor anuncio no funciona si no captura la atención en los primeros 3 segundos. Creamos contenido que enamora y vende: fotografía profesional para Marketplaces, videos cinemáticos, recorridos dinámicos y tomas aéreas con dron. Hacemos que tu producto se vea premium.",
+    tags: ["Video", "Fotografía", "Dron", "Contenido"],
+    color: "#8B6B52",
+    video: "/videos/produccion.mp4",
   },
   {
     id: "02",
-    title: "Gestión de Redes Sociales",
+    title: "Meta & Google Ads",
     description:
-      "Estrategias personalizadas para Instagram, Facebook, LinkedIn y TikTok. Contenido visual y textual que conecta emocionalmente y genera crecimiento orgánico.",
-    tags: ["Social Media", "Contenido", "Comunidad"],
-    color: "#4A6FA5",
-    video: "/videos/redes.mp4",
-  },
-  {
-    id: "03",
-    title: "Creación de Contenido",
-    description:
-      "Fotos, reels, videos promocionales y campañas visuales alineadas a tu identidad. Producción profesional con dron incluida.",
-    tags: ["Video", "Foto", "Dron"],
-    color: "#4A7A6A",
-    video: "/videos/contenido.mp4",
-  },
-  {
-    id: "04",
-    title: "Desarrollo de Páginas Web",
-    description:
-      "Sitios web responsivos, atractivos y funcionales. Cada sitio está pensado en el usuario y optimizado para contacto, ventas o posicionamiento.",
-    tags: ["Web", "UX/UI", "SEO"],
-    color: "#2E3F5C",
-    video: "/videos/web.mp4",
-  },
-  {
-    id: "05",
-    title: "Meta Ads & Google Ads",
-    description:
-      "Segmentamos, estructuramos y ejecutamos campañas publicitarias que generan tráfico, conversiones y leads calificados. Cada peso invertido rinde resultados reales.",
-    tags: ["Paid Media", "Conversión", "ROI"],
-    color: "#7A5C8A",
+      "Calidad sobre ego. No competimos ciegamente por la posición #1 que infla costos; estructuramos campañas inteligentes apuntando a rentabilidad. Captamos tráfico masivo con alta intención de compra en el momento exacto.",
+    tags: ["Meta Ads", "Google Ads", "Paid Media", "ROI"],
+    color: "#2E4A7A",
     video: "/videos/ads.mp4",
   },
   {
-    id: "06",
-    title: "Productos Promocionales",
+    id: "03",
+    title: "Landing Pages",
     description:
-      "Vasos, termos, plumas, mochilas, bolsas y más — personalizados con tu marca para campañas, activaciones, eventos corporativos y fidelización.",
-    tags: ["Merchandising", "Eventos", "Branding"],
-    color: "#5C7A70",
-    video: "/videos/merch.mp4",
+      "Un sitio web tradicional distrae; una Landing Page vende. Desarrollamos páginas limpias, sin puntos de fuga, ultra-rápidas y enfocadas 100% en captar los leads generados por nuestro contenido audiovisual.",
+    tags: ["Diseño Web", "Conversión", "UX", "SEO"],
+    color: "#2E5C4A",
+    video: "/videos/landing.mp4",
+  },
+  {
+    id: "04",
+    title: "Automatización & Ecosistema de Ventas",
+    description:
+      "Llevamos el tráfico directo a cierres de ventas. Integramos bots de WhatsApp automáticos para tiempos de respuesta menores a 60 segundos, y optimizamos el posicionamiento SEO de cada unidad en tu catálogo.",
+    tags: ["WhatsApp Bot", "SEO", "Automatización", "CRM"],
+    color: "#4A2E5C",
+    video: "/videos/automatizacion.mp4",
   },
 ];
 

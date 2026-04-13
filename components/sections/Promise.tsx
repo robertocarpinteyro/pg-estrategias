@@ -35,12 +35,13 @@ export default function Promise() {
       <FadeIn delay={0.15}>
         <p
           className="mt-8 text-sm leading-relaxed"
-          style={{ color: "var(--muted)", maxWidth: "500px", lineHeight: 1.9 }}
+          style={{ color: "var(--muted)", maxWidth: "520px", lineHeight: 1.9 }}
         >
-          En PG-Estrategias nos tomamos en serio el valor de tu marca.
-          Te acompañamos en todo el proceso — desde la planeación estratégica
-          hasta la ejecución y el seguimiento. Nuestro equipo combina
-          creatividad con análisis, diseño con tecnología, y pasión con enfoque.
+          En un mundo hipercompetitivo, no basta con "estar en redes" o pagar
+          por clics vacíos. En PG Estrategias unimos la creatividad visual de
+          más alto nivel con la precisión de los datos. Te acompañamos desde el
+          primer disparo de cámara hasta que el prospecto calificado llega a tu
+          WhatsApp.
         </p>
         <a
           href="#contacto"
@@ -60,7 +61,7 @@ export default function Promise() {
             e.currentTarget.style.transform = "translateY(0)";
           }}
         >
-          Ponerse en contacto
+          Agenda tu cita gratis
         </a>
       </FadeIn>
     </section>

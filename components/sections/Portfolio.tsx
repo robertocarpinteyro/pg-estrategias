@@ -147,7 +147,7 @@ export default function Portfolio() {
     >
       {/* Header */}
       <FadeIn>
-        <div className="flex flex-col md:flex-row md:items-end gap-6 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end gap-6 mb-10">
           <div>
             <span className="num-label">NUESTRO TRABAJO</span>
             <h2
@@ -163,8 +163,8 @@ export default function Portfolio() {
             >
               Tu crecimiento empieza
               <br />
-              con una{" "}
-              <span style={{ color: "var(--accent)" }}>decisión.</span>
+              con{" "}
+              <span style={{ color: "var(--accent)" }}>números reales.</span>
             </h2>
           </div>
           <div className="md:ml-auto flex flex-col md:items-end gap-2">
@@ -172,26 +172,84 @@ export default function Portfolio() {
               className="text-sm"
               style={{
                 color: "var(--muted)",
-                maxWidth: "280px",
+                maxWidth: "300px",
                 lineHeight: 1.8,
               }}
             >
-              Cada marca que ha confiado en nosotros ha escalado su presencia,
-              autoridad y ventas.
+              Cada elemento —desde la iluminación del video hasta el botón de
+              la web— se mide y se optimiza. Nuestros resultados superan los
+              estándares de la industria.
             </p>
-            <span
-              className="font-bold"
+          </div>
+        </div>
+      </FadeIn>
+
+      {/* Metrics */}
+      <FadeIn delay={0.1}>
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 mb-14"
+          style={{ border: "1px solid var(--border)" }}
+        >
+          {[
+            {
+              value: "+950",
+              label: "Conversaciones de ventas generadas",
+              sub: "Prospectos calificados llegando directamente",
+            },
+            {
+              value: "10.44%",
+              label: "CTR promedio de campaña",
+              sub: "Impulsado por contenido audiovisual de alta retención",
+            },
+            {
+              value: "↓ CPL",
+              label: "Costo por lead optimizado",
+              sub: "Eficiencia máxima en cada peso invertido",
+            },
+          ].map((metric, i) => (
+            <div
+              key={i}
               style={{
-                fontFamily: "var(--font-space-grotesk)",
-                fontSize: "2.5rem",
-                letterSpacing: "-0.04em",
-                color: "var(--text)",
-                opacity: 0.15,
+                padding: "1.75rem 2rem",
+                borderRight: i < 2 ? "1px solid var(--border)" : "none",
               }}
             >
-              {String(projects.length).padStart(2, "0")}
-            </span>
-          </div>
+              <p
+                style={{
+                  fontFamily: "var(--font-space-grotesk)",
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.04em",
+                  color: "var(--accent)",
+                  lineHeight: 1,
+                  marginBottom: "0.5rem",
+                }}
+              >
+                {metric.value}
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-space-grotesk)",
+                  fontSize: "0.75rem",
+                  fontWeight: 700,
+                  letterSpacing: "-0.01em",
+                  color: "var(--text)",
+                  marginBottom: "0.3rem",
+                }}
+              >
+                {metric.label}
+              </p>
+              <p
+                style={{
+                  fontSize: "0.68rem",
+                  color: "var(--muted)",
+                  lineHeight: 1.6,
+                }}
+              >
+                {metric.sub}
+              </p>
+            </div>
+          ))}
         </div>
       </FadeIn>
 

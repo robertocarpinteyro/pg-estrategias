@@ -66,8 +66,10 @@ export default function Hero() {
               lineHeight: 1.7,
             }}
           >
-            Creamos estrategias de marketing digital que te posicionan,
-            conectan con tu audiencia y generan resultados medibles.
+            Combinamos producción audiovisual de alto impacto con estrategias
+            360° de performance. Dejamos atrás los clics sin conversión;
+            construimos un ecosistema diseñado para generar prospectos
+            calificados y resultados medibles.
           </p>
           <div className="flex items-center gap-4 shrink-0">
             <a

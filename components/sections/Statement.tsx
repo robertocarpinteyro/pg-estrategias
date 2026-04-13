@@ -21,28 +21,25 @@ export default function Statement() {
             color: "var(--text)",
           }}
         >
-          En un mundo donde millones de marcas compiten por la atención,
-          solo las que logran diferenciarse con{" "}
-          <span style={{ color: "var(--accent)" }}>claridad,</span>{" "}
-          <span style={{ color: "var(--accent)" }}>creatividad</span>{" "}
-          y <span style={{ color: "var(--accent)" }}>propósito</span>{" "}
-          logran destacar.
+          Sin contenido visual de alto impacto,{" "}
+          <span style={{ color: "var(--accent)" }}>ninguna estrategia</span>{" "}
+          de marketing convierte. El contenido es el motor.
+          La estrategia es el combustible.
         </p>
       </FadeIn>
 
-      <div
-        className="mt-14 md:mt-20 grid md:grid-cols-2 gap-10 md:gap-20"
-      >
+      <div className="mt-14 md:mt-20 grid md:grid-cols-2 gap-10 md:gap-20">
         <FadeIn delay={0.1}>
           <p
             className="text-sm leading-relaxed"
             style={{ color: "var(--muted)", lineHeight: 1.85 }}
           >
-            En PG Estrategias, entendemos que no se trata solo de estar
-            presentes en redes o de tener una página bonita… se trata de tener
-            una estrategia sólida que te haga{" "}
+            En PG Estrategias entendemos que no se trata de estar en redes o
+            pagar por clics vacíos. Se trata de construir un ecosistema donde
+            cada pieza —desde la iluminación de un video hasta el botón de una
+            landing— está diseñada para{" "}
             <strong style={{ color: "var(--text)", fontWeight: 600 }}>
-              visible, deseado y recordado.
+              convertir prospectos en clientes reales.
             </strong>
           </p>
         </FadeIn>
@@ -51,10 +48,10 @@ export default function Statement() {
             className="text-sm leading-relaxed"
             style={{ color: "var(--muted)", lineHeight: 1.85 }}
           >
-            Somos una agencia de marketing joven pero con visión clara, fundada
-            por profesionales apasionados por la creatividad, la tecnología y
-            los resultados. Llevamos más de un año ayudando a negocios de
-            diversos sectores a crecer.
+            Somos una agencia con enfoque de performance: medimos cada peso
+            invertido, optimizamos cada campaña y entregamos reportes
+            transparentes. Nuestro proceso va desde la producción audiovisual
+            hasta que el prospecto llega a tu WhatsApp, listo para cerrar.
           </p>
         </FadeIn>
       </div>

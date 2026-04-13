@@ -3,14 +3,12 @@
 import { motion } from "framer-motion";
 
 const items = [
-  "BRANDING ESTRATÉGICO",
-  "GESTIÓN DE REDES",
-  "CREACIÓN DE CONTENIDO",
+  "PRODUCCIÓN AUDIOVISUAL",
   "META ADS",
   "GOOGLE ADS",
-  "DISEÑO WEB",
-  "IDENTIDAD VISUAL",
-  "PRODUCCIÓN CON DRON",
+  "LANDING PAGES",
+  "FOTOGRAFÍA CON DRON",
+  "ESTRATEGIA 360°",
 ];
 
 export default function Marquee() {

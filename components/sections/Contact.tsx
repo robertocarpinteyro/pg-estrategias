@@ -6,13 +6,11 @@ import FadeIn from "@/components/ui/FadeIn";
 import { Clock, MapPin, CheckCircle, AlertCircle } from "lucide-react";
 
 const services = [
-  { value: "branding", label: "Branding Estratégico" },
-  { value: "redes", label: "Gestión de Redes Sociales" },
-  { value: "contenido", label: "Creación de Contenido" },
-  { value: "web", label: "Desarrollo de Páginas Web" },
-  { value: "ads", label: "Meta Ads & Google Ads" },
-  { value: "promo", label: "Productos Promocionales" },
-  { value: "todo", label: "Todo lo anterior" },
+  { value: "produccion", label: "Producción Audiovisual y Fotografía" },
+  { value: "ads", label: "Meta & Google Ads" },
+  { value: "landing", label: "Landing Pages" },
+  { value: "automatizacion", label: "Automatización & Ecosistema de Ventas" },
+  { value: "todo", label: "Todo lo anterior (Estrategia 360°)" },
 ];
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -98,10 +96,11 @@ export default function Contact() {
           </h2>
           <p
             className="text-sm mb-8"
-            style={{ color: "var(--muted)", lineHeight: 1.9, maxWidth: "360px" }}
+            style={{ color: "var(--muted)", lineHeight: 1.9, maxWidth: "380px" }}
           >
-            Contáctanos para empezar a trabajar en el crecimiento de tu
-            negocio. Estamos listos para escucharte.
+            ¿Listo para escalar tus ventas? Multiplica tus contactos con una
+            estrategia donde cada toma, cada peso invertido y cada anuncio,
+            suma. Pide tu cotización gratuita hoy.
           </p>
 
           {/* Badges */}
