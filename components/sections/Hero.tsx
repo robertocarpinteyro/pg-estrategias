@@ -16,8 +16,23 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="min-h-screen flex flex-col justify-end pb-12 pt-28 overflow-hidden"
+      className="min-h-screen flex flex-col justify-end pb-12 pt-28 overflow-hidden relative"
     >
+      {/* Background image */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          backgroundImage: "url(https://res.cloudinary.com/dbqisatil/image/upload/v1776120738/Gemini_Generated_Image_sx19kjsx19kjsx19_reafsa.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+      {/* Overlay para mantener legibilidad del texto */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{ backgroundColor: "var(--background)", opacity: 0.82 }}
+      />
       <div className="px-5 md:px-8 max-w-7xl mx-auto w-full">
         {/* Label */}
         <motion.div
