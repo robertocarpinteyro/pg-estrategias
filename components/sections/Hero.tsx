@@ -16,24 +16,26 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="min-h-screen flex flex-col justify-end pb-12 pt-28 overflow-hidden relative"
+      className="min-h-screen flex flex-col justify-end pb-12 pt-28 overflow-hidden"
+      style={{
+        position: "relative",
+        backgroundImage: "url(https://res.cloudinary.com/dbqisatil/image/upload/v1776120738/Gemini_Generated_Image_sx19kjsx19kjsx19_reafsa.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
-      {/* Background image */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          backgroundImage: "url(https://res.cloudinary.com/dbqisatil/image/upload/v1776120738/Gemini_Generated_Image_sx19kjsx19kjsx19_reafsa.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
       {/* Overlay para mantener legibilidad del texto */}
       <div
-        className="absolute inset-0 -z-10"
-        style={{ backgroundColor: "var(--background)", opacity: 0.82 }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: "var(--background)",
+          opacity: 0.78,
+          zIndex: 0,
+        }}
       />
-      <div className="px-5 md:px-8 max-w-7xl mx-auto w-full">
+      <div className="px-5 md:px-8 max-w-7xl mx-auto w-full" style={{ position: "relative", zIndex: 1 }}>
         {/* Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -155,7 +157,7 @@ export default function Hero() {
 
       {/* Photo strip */}
       <motion.div
-        style={{ y }}
+        style={{ y, position: "relative", zIndex: 1 }}
         className="mt-14 px-5 md:px-8"
       >
         <div className="max-w-7xl mx-auto grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
