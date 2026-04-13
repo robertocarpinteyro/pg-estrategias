@@ -144,12 +144,13 @@ export const paquetes = [
   {
     id: "inicial-1",
     categoria: "Paquete Inicial",
-    nombre: "Paquete 1 — Esencial",
+    nombre: "Esencial",
     precio: 7500,
     pauta: null,
     destacado: false,
     etiqueta: null,
     descripcion: "Ideal para negocios que están comenzando su presencia digital y necesitan establecer bases sólidas.",
+    whatsappMsg: "Hola, me interesa el *Paquete Esencial* de PG Estrategias ($7,500/mes). Me gustaría recibir más información para comenzar.",
     features: [
       { label: "Creación u optimización de redes sociales, cuentas publicitarias y Google Business Profile", incluido: true },
       { label: "Estudio de buyer persona, cliente ideal y benchmarks", incluido: true },
@@ -167,12 +168,13 @@ export const paquetes = [
   {
     id: "inicial-1a",
     categoria: "Paquete Inicial",
-    nombre: "Paquete 1A — Esencial Plus",
+    nombre: "Esencial Plus",
     precio: 11000,
     pauta: null,
     destacado: true,
     etiqueta: null,
     descripcion: "Para negocios que buscan acelerar su crecimiento con más contenido, branding y seguimiento más cercano.",
+    whatsappMsg: "Hola, me interesa el *Paquete Esencial Plus* de PG Estrategias ($11,000/mes). Me gustaría recibir más información.",
     features: [
       { label: "Creación u optimización de redes sociales, cuentas publicitarias y Google Business Profile", incluido: true },
       { label: "Estudio de buyer persona, cliente ideal y benchmarks", incluido: true },
@@ -191,12 +193,13 @@ export const paquetes = [
   {
     id: "avanzado-promo",
     categoria: "Paquete Avanzado",
-    nombre: "Paquete 2 Promo — Crecimiento",
+    nombre: "Impulso",
     precio: 11000,
     pauta: 2500,
     destacado: false,
     etiqueta: "Promoción",
     descripcion: "Paquete promocional que combina gestión orgánica con pauta publicitaria para empezar a escalar resultados.",
+    whatsappMsg: "Hola, me interesa el *Paquete Impulso* de PG Estrategias ($11,000/mes + $2,500 en pauta incluida). Me gustaría recibir más información.",
     features: [
       { label: "Gestión de redes sociales: 12 publicaciones (4 artes, 3 carruseles, 3 reels)", incluido: true },
       { label: "Estrategia orgánica y parrilla de contenido", incluido: true },
@@ -217,12 +220,13 @@ export const paquetes = [
   {
     id: "avanzado-2a",
     categoria: "Paquete Avanzado",
-    nombre: "Paquete 2A — Crecimiento Plus",
+    nombre: "Escala",
     precio: 14000,
     pauta: 3000,
     destacado: true,
     etiqueta: null,
     descripcion: "Para negocios listos para escalar con mayor inversión publicitaria, más contenido y mensajería ampliada.",
+    whatsappMsg: "Hola, me interesa el *Paquete Escala* de PG Estrategias ($14,000/mes + $3,000 en pauta incluida). Me gustaría recibir más información.",
     features: [
       { label: "Gestión de redes sociales: 12 publicaciones (4 artes, 4 carruseles, 4 reels)", incluido: true },
       { label: "Estrategia orgánica y parrilla de contenido", incluido: true },
@@ -243,12 +247,13 @@ export const paquetes = [
   {
     id: "avanzado-2",
     categoria: "Paquete Avanzado",
-    nombre: "Paquete 2 — Premium",
+    nombre: "Élite",
     precio: 27000,
     pauta: 7000,
     destacado: false,
     etiqueta: "Más completo",
     descripcion: "Solución integral para marcas que buscan dominar su mercado digital con máxima producción, pauta y estrategia.",
+    whatsappMsg: "Hola, me interesa el *Paquete Élite* de PG Estrategias ($27,000/mes + $7,000 en pauta incluida). Me gustaría recibir más información.",
     features: [
       { label: "Gestión de redes sociales: 20 publicaciones (7 artes, 5 carruseles, 8 reels)", incluido: true },
       { label: "Estrategia orgánica y parrilla de contenido", incluido: true },

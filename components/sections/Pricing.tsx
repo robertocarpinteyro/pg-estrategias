@@ -6,6 +6,12 @@ import FadeIn from "@/components/ui/FadeIn";
 import { paquetes, addOns } from "@/lib/data";
 import { Check } from "lucide-react";
 
+const WA_NUMBER = "5212221215051";
+
+function waLink(msg: string) {
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+
 type Paquete = typeof paquetes[0];
 
 function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
@@ -255,7 +261,9 @@ function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
 
           {/* CTA */}
           <a
-            href="#contacto"
+            href={waLink(pkg.whatsappMsg)}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               display: "block",
               textAlign: "center",
@@ -291,7 +299,7 @@ function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
               }
             }}
           >
-            Solicitar este paquete
+            Solicitar este paquete →
           </a>
         </div>
       </div>
@@ -542,7 +550,9 @@ export default function Pricing() {
             personalizada sin compromiso.
           </p>
           <a
-            href="#contacto"
+            href={waLink("Hola, me gustaría solicitar una cotización personalizada para mi negocio. ¿Podrían ayudarme?")}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               flexShrink: 0,
               display: "inline-block",
