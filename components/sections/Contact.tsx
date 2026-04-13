@@ -6,10 +6,10 @@ import FadeIn from "@/components/ui/FadeIn";
 import { Clock, MapPin, CheckCircle, AlertCircle } from "lucide-react";
 
 const services = [
-  { value: "produccion", label: "Producción Audiovisual y Fotografía" },
-  { value: "ads", label: "Meta & Google Ads" },
-  { value: "landing", label: "Landing Pages" },
-  { value: "automatizacion", label: "Automatización & Ecosistema de Ventas" },
+  { value: "redes", label: "Gestión de Redes Sociales" },
+  { value: "paid-media", label: "Paid Media (Google Ads & Meta Ads)" },
+  { value: "produccion", label: "Producción Audiovisual" },
+  { value: "web", label: "Sitios Web & Landing Pages" },
   { value: "todo", label: "Todo lo anterior (Estrategia 360°)" },
 ];
 

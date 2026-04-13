@@ -1,39 +1,39 @@
 export const services = [
   {
     id: "01",
-    title: "Producción Audiovisual y Fotografía",
+    title: "Gestión de Redes Sociales",
     description:
-      "El mejor anuncio no funciona si no captura la atención en los primeros 3 segundos. Creamos contenido que enamora y vende: fotografía profesional para Marketplaces, videos cinemáticos, recorridos dinámicos y tomas aéreas con dron. Hacemos que tu producto se vea premium.",
-    tags: ["Video", "Fotografía", "Dron", "Contenido"],
-    color: "#8B6B52",
-    video: "/videos/produccion.mp4",
+      "Construimos y gestionamos tu presencia en Instagram, Facebook, TikTok y LinkedIn. Estrategia de contenido, calendario editorial, diseño de piezas visuales y seguimiento de comunidad. Tú te dedicas a tu negocio; nosotros a que te vean.",
+    tags: ["Instagram", "TikTok", "Contenido", "Comunidad"],
+    color: "#5C6B8A",
+    video: "/videos/redes.mp4",
   },
   {
     id: "02",
-    title: "Meta & Google Ads",
+    title: "Paid Media",
     description:
-      "Calidad sobre ego. No competimos ciegamente por la posición #1 que infla costos; estructuramos campañas inteligentes apuntando a rentabilidad. Captamos tráfico masivo con alta intención de compra en el momento exacto.",
-    tags: ["Meta Ads", "Google Ads", "Paid Media", "ROI"],
+      "Campañas de Google Ads y Meta Ads estructuradas para rentabilidad, no para ego. No perseguimos la posición #1 que infla costos — apuntamos a las posiciones 2 y 3 donde están los prospectos listos para comprar. Cada peso invertido rinde resultados medibles.",
+    tags: ["Google Ads", "Meta Ads", "ROI", "Performance"],
     color: "#2E4A7A",
     video: "/videos/ads.mp4",
   },
   {
     id: "03",
-    title: "Landing Pages",
+    title: "Producción Audiovisual",
     description:
-      "Un sitio web tradicional distrae; una Landing Page vende. Desarrollamos páginas limpias, sin puntos de fuga, ultra-rápidas y enfocadas 100% en captar los leads generados por nuestro contenido audiovisual.",
-    tags: ["Diseño Web", "Conversión", "UX", "SEO"],
-    color: "#2E5C4A",
-    video: "/videos/landing.mp4",
+      "Un anuncio no convierte si no captura la atención en los primeros 3 segundos. Producimos videos cinemáticos, reels, fotografía profesional y tomas aéreas con dron. Hacemos que tu producto se vea premium antes de invertir un solo peso en publicidad.",
+    tags: ["Video", "Fotografía", "Dron", "Reels"],
+    color: "#8B6B52",
+    video: "/videos/produccion.mp4",
   },
   {
     id: "04",
-    title: "Automatización & Ecosistema de Ventas",
+    title: "Sitios Web & Landing Pages",
     description:
-      "Llevamos el tráfico directo a cierres de ventas. Integramos bots de WhatsApp automáticos para tiempos de respuesta menores a 60 segundos, y optimizamos el posicionamiento SEO de cada unidad en tu catálogo.",
-    tags: ["WhatsApp Bot", "SEO", "Automatización", "CRM"],
-    color: "#4A2E5C",
-    video: "/videos/automatizacion.mp4",
+      "Un sitio web tradicional distrae; una landing page bien construida vende. Desarrollamos desde páginas corporativas hasta landing pages ultra-enfocadas, sin puntos de fuga, conectadas directamente a tu WhatsApp o CRM para que ningún prospecto se pierda.",
+    tags: ["Sitio Web", "Landing Page", "UX/UI", "SEO"],
+    color: "#2E5C4A",
+    video: "/videos/web.mp4",
   },
 ];
 
