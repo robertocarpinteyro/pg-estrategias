@@ -143,7 +143,7 @@ export default function Hero() {
         style={{ y }}
         className="mt-14 px-5 md:px-8"
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div className="max-w-7xl mx-auto grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
           {heroImages.map((img, i) => (
             <motion.div
               key={img.id}
