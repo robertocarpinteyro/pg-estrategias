@@ -160,13 +160,25 @@ export default function Hero() {
                 backgroundColor: img.color,
               }}
             >
+              {/* Video (cuando hay URL) o color de fondo */}
+              {img.video ? (
+                <video
+                  src={img.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : null}
+
               {/* Gradient overlay */}
               <div
                 className="absolute inset-0 transition-opacity duration-300"
                 style={{
                   background:
-                    "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)",
-                  opacity: 0.7,
+                    "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)",
+                  opacity: img.video ? 1 : 0.7,
                 }}
               />
               {/* Hover overlay */}
@@ -182,7 +194,7 @@ export default function Hero() {
                   fontSize: "0.65rem",
                   fontWeight: 600,
                   letterSpacing: "0.05em",
-                  opacity: 0.7,
+                  opacity: 0.6,
                 }}
               >
                 {img.id}
@@ -190,26 +202,17 @@ export default function Hero() {
               {/* Bottom label */}
               <div className="absolute bottom-3 left-3 right-3">
                 <p
-                  className="text-white text-xs uppercase tracking-wide leading-tight"
+                  className="text-white uppercase leading-tight"
                   style={{
                     fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.65rem",
-                    fontWeight: 500,
-                    letterSpacing: "0.08em",
-                    opacity: 0.85,
+                    fontSize: "0.75rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
                   }}
                 >
                   {img.label}
                 </p>
               </div>
-              {/* Texture overlay */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08) 0%, transparent 60%)",
-                }}
-              />
             </motion.div>
           ))}
         </div>
