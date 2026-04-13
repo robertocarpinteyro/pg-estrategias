@@ -1,156 +1,410 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import FadeIn from "@/components/ui/FadeIn";
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { services } from "@/lib/data";
 
+const PANEL_TRANSITION = { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] as const };
+
+const slideVariants = {
+  enter: { y: "100%" },
+  center: { y: "0%" },
+  exit: { y: "-100%" },
+};
+
+const fadeSlideVariants = {
+  enter: { y: "60px", opacity: 0 },
+  center: { y: "0px", opacity: 1 },
+  exit: { y: "-60px", opacity: 0 },
+};
+
 export default function Services() {
-  const [hovered, setHovered] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const prevIndexRef = useRef(0);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (v) => {
+      const newIndex = Math.min(
+        Math.floor(v * services.length),
+        services.length - 1
+      );
+      if (newIndex !== prevIndexRef.current) {
+        prevIndexRef.current = newIndex;
+        setActiveIndex(newIndex);
+      }
+    });
+    return unsubscribe;
+  }, [scrollYProgress]);
+
+  const service = services[activeIndex];
 
   return (
     <section
       id="servicios"
-      className="py-24 md:py-36 px-5 md:px-8 max-w-7xl mx-auto"
-      style={{ borderTop: "1px solid var(--border)" }}
+      ref={sectionRef}
+      className="relative"
+      style={{
+        height: `${services.length * 100}vh`,
+        borderTop: "1px solid var(--border)",
+      }}
     >
-      {/* Header */}
-      <FadeIn>
-        <div className="flex flex-col md:flex-row md:items-end gap-6 mb-14">
-          <div>
-            <span className="num-label">SERVICIOS</span>
-            <h2
-              className="font-bold mt-3 uppercase"
+      {/* Sticky viewport */}
+      <div
+        className="sticky top-0 overflow-hidden"
+        style={{ height: "100vh" }}
+      >
+        {/* Top bar */}
+        <div
+          className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 md:px-8"
+          style={{
+            height: "52px",
+            borderBottom: "1px solid var(--border)",
+            backgroundColor: "var(--background)",
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              fontSize: "0.65rem",
+              fontWeight: 600,
+              letterSpacing: "0.14em",
+              color: "var(--muted)",
+              textTransform: "uppercase",
+            }}
+          >
+            Servicios
+          </span>
+
+          {/* Progress dots */}
+          <div className="flex items-center gap-2">
+            {services.map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  width: i === activeIndex ? "20px" : "5px",
+                  height: "2px",
+                  backgroundColor:
+                    i === activeIndex ? "var(--accent)" : "var(--border)",
+                  transition: "all 0.35s ease",
+                  borderRadius: "2px",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Counter */}
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={activeIndex}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.25 }}
               style={{
                 fontFamily: "var(--font-space-grotesk)",
-                fontSize: "clamp(2rem, 4.5vw, 4rem)",
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-                lineHeight: 1.0,
-                color: "var(--text)",
+                fontSize: "0.7rem",
+                fontWeight: 600,
+                letterSpacing: "0.08em",
+                color: "var(--muted)",
               }}
             >
-              Nuestros servicios
-              <br />
-              incluyen
-            </h2>
-          </div>
-          <p
-            className="md:ml-auto text-sm"
-            style={{
-              color: "var(--muted)",
-              maxWidth: "280px",
-              lineHeight: 1.8,
-            }}
-          >
-            Nuestra metodología combina análisis, ejecución creativa y
-            seguimiento. Trabajamos contigo, no solo para ti.
-          </p>
+              {String(activeIndex + 1).padStart(2, "0")} /{" "}
+              {String(services.length).padStart(2, "0")}
+            </motion.span>
+          </AnimatePresence>
         </div>
-      </FadeIn>
 
-      {/* Grid */}
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-        style={{
-          border: "1px solid var(--border)",
-        }}
-      >
-        {services.map((service, i) => (
-          <FadeIn
-            key={service.id}
-            delay={0.05 * (i % 3)}
-          >
-            <motion.div
-              className="p-8 cursor-default relative overflow-hidden"
-              style={{
-                borderRight: i % 3 !== 2 ? "1px solid var(--border)" : "none",
-                borderBottom:
-                  Math.floor(i / 3) < Math.floor((services.length - 1) / 3)
-                    ? "1px solid var(--border)"
-                    : "none",
-                backgroundColor:
-                  hovered === service.id ? "var(--card-bg)" : "transparent",
-                transition: "background-color 0.25s ease",
-              }}
-              onMouseEnter={() => setHovered(service.id)}
-              onMouseLeave={() => setHovered(null)}
-            >
-              {/* Accent line on hover */}
+        {/* Two panels */}
+        <div
+          className="grid"
+          style={{
+            gridTemplateColumns: "1fr 1fr",
+            height: "100%",
+            paddingTop: "52px",
+          }}
+        >
+          {/* ── LEFT: Video panel ── */}
+          <div className="relative overflow-hidden">
+            <AnimatePresence mode="sync">
               <motion.div
-                className="absolute left-0 top-0 bottom-0"
-                style={{ width: "2px", backgroundColor: "var(--accent)", transformOrigin: "top" }}
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: hovered === service.id ? 1 : 0 }}
-                transition={{ duration: 0.2 }}
-              />
-              <span className="num-label">{service.id}</span>
-              <h3
-                className="font-bold mt-4 mb-3"
+                key={activeIndex}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={PANEL_TRANSITION}
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ backgroundColor: service.color }}
+              >
+                {/*
+                 * VIDEO PLACEHOLDER
+                 * Cuando tengas el archivo, reemplaza el <div> de abajo con:
+                 *   <video
+                 *     src={service.video}
+                 *     autoPlay muted loop playsInline
+                 *     className="absolute inset-0 w-full h-full object-cover"
+                 *   />
+                 */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(160deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%)",
+                  }}
+                />
+
+                {/* Big number watermark */}
+                <span
+                  className="relative z-10 select-none"
+                  style={{
+                    fontFamily: "var(--font-space-grotesk)",
+                    fontSize: "clamp(6rem, 14vw, 12rem)",
+                    fontWeight: 800,
+                    color: "rgba(255,255,255,0.1)",
+                    letterSpacing: "-0.06em",
+                    lineHeight: 1,
+                  }}
+                >
+                  {service.id}
+                </span>
+
+                {/* Bottom label */}
+                <div className="absolute bottom-7 left-7 right-7 flex items-end justify-between">
+                  <div>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-space-grotesk)",
+                        fontSize: "0.6rem",
+                        fontWeight: 600,
+                        letterSpacing: "0.16em",
+                        color: "rgba(255,255,255,0.5)",
+                        textTransform: "uppercase",
+                        marginBottom: "4px",
+                      }}
+                    >
+                      Video · {service.tags[0]}
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-space-grotesk)",
+                        fontSize: "0.85rem",
+                        fontWeight: 600,
+                        color: "rgba(255,255,255,0.9)",
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      {service.title}
+                    </p>
+                  </div>
+                  {/* Scroll indicator */}
+                  <motion.div
+                    animate={{ y: [0, 6, 0] }}
+                    transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ opacity: activeIndex < services.length - 1 ? 0.5 : 0 }}
+                  >
+                    <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+                      <rect x="6.5" y="0" width="3" height="3" rx="1.5" fill="white" />
+                      <line x1="8" y1="6" x2="8" y2="24" stroke="white" strokeWidth="1" />
+                    </svg>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* ── RIGHT: Info panel ── */}
+          <div
+            className="relative overflow-hidden"
+            style={{ borderLeft: "1px solid var(--border)" }}
+          >
+            <AnimatePresence mode="sync">
+              <motion.div
+                key={activeIndex}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ ...PANEL_TRANSITION, delay: 0.05 }}
+                className="absolute inset-0 flex flex-col justify-center"
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontSize: "1.1rem",
-                  letterSpacing: "-0.02em",
-                  color: "var(--text)",
+                  padding: "clamp(2rem, 5vw, 4rem)",
+                  backgroundColor: "var(--background)",
                 }}
               >
-                {service.title}
-              </h3>
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: "var(--muted)", lineHeight: 1.8 }}
-              >
-                {service.description}
-              </p>
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mt-5">
-                {service.tags.map((tag) => (
+                {/* Service number */}
+                <motion.span
+                  variants={fadeSlideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  style={{
+                    fontFamily: "var(--font-space-grotesk)",
+                    fontSize: "0.65rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.14em",
+                    color: "var(--accent)",
+                    textTransform: "uppercase",
+                    marginBottom: "1.25rem",
+                    display: "block",
+                  }}
+                >
+                  {service.id} — Servicio
+                </motion.span>
+
+                {/* Title */}
+                <motion.h2
+                  variants={fadeSlideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.5, delay: 0.27 }}
+                  style={{
+                    fontFamily: "var(--font-space-grotesk)",
+                    fontSize: "clamp(1.6rem, 3vw, 2.8rem)",
+                    fontWeight: 700,
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1.05,
+                    color: "var(--text)",
+                    marginBottom: "1.5rem",
+                  }}
+                >
+                  {service.title}
+                </motion.h2>
+
+                {/* Divider */}
+                <motion.div
+                  variants={fadeSlideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.5, delay: 0.32 }}
+                  style={{
+                    width: "36px",
+                    height: "2px",
+                    backgroundColor: "var(--accent)",
+                    marginBottom: "1.5rem",
+                  }}
+                />
+
+                {/* Description */}
+                <motion.p
+                  variants={fadeSlideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.5, delay: 0.37 }}
+                  style={{
+                    color: "var(--muted)",
+                    lineHeight: 1.85,
+                    fontSize: "0.95rem",
+                    maxWidth: "400px",
+                    marginBottom: "2rem",
+                  }}
+                >
+                  {service.description}
+                </motion.p>
+
+                {/* Tags */}
+                <motion.div
+                  variants={fadeSlideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.5, delay: 0.42 }}
+                  className="flex flex-wrap gap-2 mb-8"
+                >
+                  {service.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontFamily: "var(--font-space-grotesk)",
+                        fontSize: "0.65rem",
+                        fontWeight: 600,
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        padding: "0.3rem 0.8rem",
+                        border: "1px solid var(--border)",
+                        color: "var(--muted)",
+                        borderRadius: "2px",
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </motion.div>
+
+                {/* CTA */}
+                <motion.a
+                  href="#contacto"
+                  variants={fadeSlideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.5, delay: 0.47 }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    fontFamily: "var(--font-space-grotesk)",
+                    fontSize: "0.75rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "var(--accent)",
+                    textDecoration: "none",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = "0.7";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = "1";
+                  }}
+                >
+                  Solicitar este servicio
+                  <span style={{ letterSpacing: 0 }}>→</span>
+                </motion.a>
+
+                {/* Bottom-right: scroll hint text */}
+                <div
+                  className="absolute bottom-7 right-7 flex flex-col items-center gap-2"
+                  style={{
+                    opacity: activeIndex < services.length - 1 ? 1 : 0,
+                    transition: "opacity 0.4s",
+                  }}
+                >
                   <span
-                    key={tag}
-                    className="text-xs px-2.5 py-1 rounded-full"
                     style={{
-                      backgroundColor: "var(--border)",
-                      color: "var(--muted)",
-                      fontSize: "0.68rem",
-                      letterSpacing: "0.04em",
                       fontFamily: "var(--font-space-grotesk)",
+                      fontSize: "0.55rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.18em",
+                      color: "var(--muted)",
                       textTransform: "uppercase",
+                      writingMode: "vertical-rl",
                     }}
                   >
-                    {tag}
+                    Scroll
                   </span>
-                ))}
-              </div>
-            </motion.div>
-          </FadeIn>
-        ))}
-      </div>
-
-      <FadeIn delay={0.1}>
-        <div className="mt-12 text-center">
-          <a
-            href="#contacto"
-            className="inline-block px-8 py-3.5 text-sm font-semibold uppercase tracking-wide rounded-sm transition-all duration-200 cursor-pointer"
-            style={{
-              border: "1px solid var(--border)",
-              color: "var(--text)",
-              fontFamily: "var(--font-space-grotesk)",
-              letterSpacing: "0.04em",
-              textDecoration: "none",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "var(--accent)";
-              e.currentTarget.style.color = "var(--accent)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "var(--border)";
-              e.currentTarget.style.color = "var(--text)";
-            }}
-          >
-            Solicitar cotización gratuita →
-          </a>
+                  <div
+                    style={{
+                      width: "1px",
+                      height: "32px",
+                      backgroundColor: "var(--border)",
+                    }}
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
-      </FadeIn>
+      </div>
     </section>
   );
 }

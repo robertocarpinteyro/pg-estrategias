@@ -5,6 +5,8 @@ export const services = [
     description:
       "Naming, logotipo, línea gráfica, tono de voz, diseño de papelería y manual de identidad. Te damos una marca lista para crecer.",
     tags: ["Identidad", "Diseño", "Estrategia"],
+    color: "#C4956A",
+    video: "/videos/branding.mp4",
   },
   {
     id: "02",
@@ -12,6 +14,8 @@ export const services = [
     description:
       "Estrategias personalizadas para Instagram, Facebook, LinkedIn y TikTok. Contenido visual y textual que conecta emocionalmente y genera crecimiento orgánico.",
     tags: ["Social Media", "Contenido", "Comunidad"],
+    color: "#4A6FA5",
+    video: "/videos/redes.mp4",
   },
   {
     id: "03",
@@ -19,6 +23,8 @@ export const services = [
     description:
       "Fotos, reels, videos promocionales y campañas visuales alineadas a tu identidad. Producción profesional con dron incluida.",
     tags: ["Video", "Foto", "Dron"],
+    color: "#4A7A6A",
+    video: "/videos/contenido.mp4",
   },
   {
     id: "04",
@@ -26,6 +32,8 @@ export const services = [
     description:
       "Sitios web responsivos, atractivos y funcionales. Cada sitio está pensado en el usuario y optimizado para contacto, ventas o posicionamiento.",
     tags: ["Web", "UX/UI", "SEO"],
+    color: "#2E3F5C",
+    video: "/videos/web.mp4",
   },
   {
     id: "05",
@@ -33,6 +41,8 @@ export const services = [
     description:
       "Segmentamos, estructuramos y ejecutamos campañas publicitarias que generan tráfico, conversiones y leads calificados. Cada peso invertido rinde resultados reales.",
     tags: ["Paid Media", "Conversión", "ROI"],
+    color: "#7A5C8A",
+    video: "/videos/ads.mp4",
   },
   {
     id: "06",
@@ -40,6 +50,8 @@ export const services = [
     description:
       "Vasos, termos, plumas, mochilas, bolsas y más — personalizados con tu marca para campañas, activaciones, eventos corporativos y fidelización.",
     tags: ["Merchandising", "Eventos", "Branding"],
+    color: "#5C7A70",
+    video: "/videos/merch.mp4",
   },
 ];
 
