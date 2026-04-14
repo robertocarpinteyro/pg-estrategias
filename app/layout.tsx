@@ -17,15 +17,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "PG Estrategias — Agencia de Marketing Digital",
+  title: "PG Estrategias — Sistema de Ventas Digitales · Puebla",
   description:
-    "Creamos estrategias de marketing digital que te posicionan, conectan con tu audiencia y generan resultados medibles. Puebla · Querétaro · CDMX.",
+    "Hacemos que tu teléfono no deje de sonar. Sistema de ventas digitales para restaurantes, constructoras y servicios profesionales en Angelópolis, Zavaleta y Cholula.",
   keywords:
-    "marketing digital, agencia, branding, redes sociales, contenido, meta ads, google ads, puebla, queretaro",
+    "sistema de ventas digitales, puebla, angelópolis, zavaleta, cholula, meta ads, google ads, landing pages, pymes puebla, marketing puebla",
   openGraph: {
-    title: "PG Estrategias — Agencia de Marketing Digital",
+    title: "PG Estrategias — Sistema de Ventas Digitales · Puebla",
     description:
-      "Haz que tu marca sea imposible de ignorar. Estrategias personalizadas, creatividad y resultados reales.",
+      "No marketing. Un sistema que pone prospectos reales en tu WhatsApp, mes a mes. Para PYMES en Puebla.",
     type: "website",
     locale: "es_MX",
   },

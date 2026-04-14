@@ -52,7 +52,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <span className="num-label" style={{ color: "rgba(255,255,255,0.6)" }}>© 2025 — AGENCIA DE MARKETING DIGITAL</span>
+          <span className="num-label" style={{ color: "rgba(255,255,255,0.6)" }}>© 2025 — SISTEMA DE VENTAS DIGITALES · PUEBLA</span>
         </motion.div>
 
         {/* Hero headline */}
@@ -72,10 +72,10 @@ export default function Hero() {
           }}
         >
           Haz que tu<br />
-          marca sea{" "}
-          <span style={{ color: "var(--accent)" }}>imposible</span>
+          teléfono no{" "}
+          <span style={{ color: "var(--accent)" }}>deje</span>
           <br />
-          de ignorar
+          de sonar.
         </motion.h1>
 
         {/* Sub-row */}
@@ -93,10 +93,10 @@ export default function Hero() {
               lineHeight: 1.7,
             }}
           >
-            Combinamos producción audiovisual de alto impacto con estrategias
-            360° de performance. Dejamos atrás los clics sin conversión;
-            construimos un ecosistema diseñado para generar prospectos
-            calificados y resultados medibles.
+            No métricas de vanidad — prospectos reales en tu WhatsApp,
+            mes a mes. Un sistema de ventas completo para restaurantes,
+            constructoras y servicios profesionales en Angelópolis,
+            Zavaleta y Cholula.
           </p>
           <div className="flex items-center gap-4 shrink-0">
             <a
@@ -160,7 +160,7 @@ export default function Hero() {
             className="text-xs font-medium uppercase"
             style={{ color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em" }}
           >
-            Diseñado para conectar
+            Para negocios en Angelópolis · Zavaleta · Cholula
           </span>
         </motion.div>
       </div>

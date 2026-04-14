@@ -6,11 +6,11 @@ import FadeIn from "@/components/ui/FadeIn";
 import { Clock, MapPin, CheckCircle, AlertCircle } from "lucide-react";
 
 const services = [
-  { value: "redes", label: "Gestión de Redes Sociales" },
-  { value: "paid-media", label: "Paid Media (Google Ads & Meta Ads)" },
-  { value: "produccion", label: "Producción Audiovisual" },
-  { value: "web", label: "Sitios Web & Landing Pages" },
-  { value: "todo", label: "Todo lo anterior (Estrategia 360°)" },
+  { value: "sistema", label: "Sistema completo de ventas digitales" },
+  { value: "paid-media", label: "Anuncios (Google Ads & Meta Ads)" },
+  { value: "produccion", label: "Producción de contenido y videos" },
+  { value: "web", label: "Sitio Web o Landing Page" },
+  { value: "redes", label: "Gestión de redes sociales" },
 ];
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -98,16 +98,16 @@ export default function Contact() {
             className="text-sm mb-8"
             style={{ color: "var(--muted)", lineHeight: 1.9, maxWidth: "380px" }}
           >
-            ¿Listo para escalar tus ventas? Multiplica tus contactos con una
-            estrategia donde cada toma, cada peso invertido y cada anuncio,
-            suma. Pide tu cotización gratuita hoy.
+            ¿Cansado de pagar marketing sin ver resultados? Cuéntanos sobre tu
+            negocio y en menos de 24 horas tienes una propuesta clara, sin
+            letra chiquita y sin compromiso.
           </p>
 
           {/* Badges */}
           <div className="flex flex-wrap gap-3 mb-8">
             {[
-              { icon: Clock, text: "Servicio 24/7" },
-              { icon: MapPin, text: "Toda la República" },
+              { icon: Clock, text: "Respuesta en 24 hrs" },
+              { icon: MapPin, text: "Angelópolis · Zavaleta · Cholula" },
             ].map(({ icon: Icon, text }) => (
               <div
                 key={text}

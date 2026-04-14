@@ -69,7 +69,7 @@ export default function Footer() {
               className="text-xs mt-2"
               style={{ color: "var(--muted)" }}
             >
-              Estamos hechos de creatividad y pasión.
+              Hacemos que tu teléfono no deje de sonar.
             </p>
             <Link
               href="#contacto"
@@ -134,7 +134,7 @@ export default function Footer() {
             fontFamily: "var(--font-space-grotesk)",
           }}
         >
-          PG ESTRATEGIAS® ©{new Date().getFullYear()} — Puebla · Querétaro · CDMX
+          PG ESTRATEGIAS® ©{new Date().getFullYear()} — Angelópolis · Zavaleta · Cholula · Puebla
         </span>
         <div className="flex items-center gap-5">
           {socialLinks.map((s) => (

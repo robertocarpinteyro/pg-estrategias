@@ -21,10 +21,10 @@ export default function Statement() {
             color: "var(--text)",
           }}
         >
-          Sin contenido visual de alto impacto,{" "}
-          <span style={{ color: "var(--accent)" }}>ninguna estrategia</span>{" "}
-          de marketing convierte. El contenido es el motor.
-          La estrategia es el combustible.
+          Sin un sistema de ventas claro,{" "}
+          <span style={{ color: "var(--accent)" }}>ningún peso</span>{" "}
+          en publicidad tiene sentido. El sistema es el motor.
+          Las ventas, el resultado.
         </p>
       </FadeIn>
 
@@ -34,12 +34,12 @@ export default function Statement() {
             className="text-sm leading-relaxed"
             style={{ color: "var(--muted)", lineHeight: 1.85 }}
           >
-            En PG Estrategias entendemos que no se trata de estar en redes o
-            pagar por clics vacíos. Se trata de construir un ecosistema donde
-            cada pieza —desde la iluminación de un video hasta el botón de una
-            landing— está diseñada para{" "}
+            Un dueño de restaurante en Angelópolis no quiere "engagement",
+            quiere mesas llenas. Una constructora en Cholula no quiere CTR,
+            quiere contratos firmados. Por eso diseñamos cada pieza del sistema
+            con una sola meta:{" "}
             <strong style={{ color: "var(--text)", fontWeight: 600 }}>
-              convertir prospectos en clientes reales.
+              prospectos reales para tu negocio en Puebla.
             </strong>
           </p>
         </FadeIn>
@@ -48,10 +48,11 @@ export default function Statement() {
             className="text-sm leading-relaxed"
             style={{ color: "var(--muted)", lineHeight: 1.85 }}
           >
-            Somos una agencia con enfoque de performance: medimos cada peso
-            invertido, optimizamos cada campaña y entregamos reportes
-            transparentes. Nuestro proceso va desde la producción audiovisual
-            hasta que el prospecto llega a tu WhatsApp, listo para cerrar.
+            Somos transparentes desde el día uno: te decimos qué sí podemos
+            lograr y qué no. Trabajamos con pocos clientes porque nos metemos
+            de fondo en cada negocio. Y tus activos digitales —sitio, Google
+            Business, redes— siempre son tuyos. Sin letras chiquitas, sin
+            sorpresas.
           </p>
         </FadeIn>
       </div>

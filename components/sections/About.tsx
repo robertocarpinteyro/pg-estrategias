@@ -27,9 +27,9 @@ export default function About() {
           >
             PG-Estrategias:
             <br />
-            Creatividad, estrategia
-            <br />y{" "}
-            <span style={{ color: "var(--accent)" }}>resultados.</span>
+            Tu brazo derecho
+            <br />en{" "}
+            <span style={{ color: "var(--accent)" }}>Puebla.</span>
           </h2>
           <a
             href="#contacto"
@@ -64,17 +64,17 @@ export default function About() {
               lineHeight: 1.7,
             }}
           >
-            Somos una agencia de marketing con sede en Puebla, presencia en
-            Querétaro y CDMX, y en expansión hacia otras ciudades de México.
+            Somos un sistema de ventas digitales con sede en Puebla, operando
+            donde están tus clientes: Angelópolis, Zavaleta y Cholula.
           </p>
           <p
             className="text-sm leading-relaxed mb-8"
             style={{ color: "var(--muted)", lineHeight: 1.9 }}
           >
-            Nacimos con la visión de hacer las cosas diferente. No creemos en
-            los servicios enlatados, ni en campañas sin alma. Creemos en el
-            marketing inteligente, personalizado, cercano, basado en datos y
-            con una fuerte carga creativa.
+            Aquí no hay becarios que no conocen tu mercado. Nos metemos hasta
+            la cocina de tu negocio para que el resultado sea dinero en el
+            banco, no corazones en una pantalla. Tus activos digitales —sitio,
+            Google Business, Fan Pages— siempre son tuyos. Sin letra chiquita.
           </p>
 
           {/* Clients list */}

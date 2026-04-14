@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 
 const items = [
-  "PRODUCCIÓN AUDIOVISUAL",
+  "SISTEMA DE VENTAS DIGITALES",
   "META ADS",
   "GOOGLE ADS",
   "LANDING PAGES",
-  "FOTOGRAFÍA CON DRON",
-  "ESTRATEGIA 360°",
+  "PRODUCCIÓN AUDIOVISUAL",
+  "PUEBLA · PYMES · RESULTADOS",
 ];
 
 export default function Marquee() {

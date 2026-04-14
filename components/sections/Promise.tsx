@@ -22,13 +22,12 @@ export default function Promise() {
             color: "var(--text)",
           }}
         >
-          No vendemos humo.
+          No marketing.
           <br />
-          Construimos marcas{" "}
-          <span style={{ color: "var(--accent)" }}>reales</span>
+          Un sistema que genera{" "}
+          <span style={{ color: "var(--accent)" }}>ventas</span>
           <br />
-          con resultados{" "}
-          <span style={{ color: "var(--accent)" }}>reales.</span>
+          de verdad.
         </h2>
       </FadeIn>
 
@@ -37,11 +36,11 @@ export default function Promise() {
           className="mt-8 text-sm leading-relaxed"
           style={{ color: "var(--muted)", maxWidth: "520px", lineHeight: 1.9 }}
         >
-          En un mundo hipercompetitivo, no basta con "estar en redes" o pagar
-          por clics vacíos. En PG Estrategias unimos la creatividad visual de
-          más alto nivel con la precisión de los datos. Te acompañamos desde el
-          primer disparo de cámara hasta que el prospecto calificado llega a tu
-          WhatsApp.
+          Los dueños de negocio en Puebla nos contratan porque están hartos de
+          pagar y recibir sólo reportes de likes que no pagan la nómina.
+          Nuestro sistema conecta cada pieza —desde el primer anuncio hasta el
+          prospecto calificado en tu WhatsApp— para que si inviertes $10,
+          regresen $30 constantes.
         </p>
         <a
           href="#contacto"

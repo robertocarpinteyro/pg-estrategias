@@ -98,8 +98,8 @@ export const clients = [
 export const heroImages = [
   {
     id: "001",
-    label: "Medicina",
-    alt: "Nicho de medicina y salud",
+    label: "Restaurantes",
+    alt: "Nicho restaurantes y CANIRAC",
     color: "#2E5C6A",
     video: "https://res.cloudinary.com/dbqisatil/video/upload/v1776102156/WhatsApp_Video_2026-03-19_at_12.43.20_PM_cbxwhl_r8x6vz.mp4",
   },
@@ -112,8 +112,8 @@ export const heroImages = [
   },
   {
     id: "003",
-    label: "Industrial",
-    alt: "Nicho industrial",
+    label: "Constructoras",
+    alt: "Nicho constructoras",
     color: "#3A3A2E",
     video: "https://res.cloudinary.com/dbqisatil/video/upload/v1776101506/AQOOS8OB9cdG9kaqBJD4Gs3Q8rZq1-GKsZfuniEPiPESVZX7OajBffPjTXpxh2rc30fe375ZzfGXVoNT5k5unrVh5Ob-KmS5bydXwKA_dmffop.mp4",
   },
@@ -133,8 +133,8 @@ export const heroImages = [
   },
   {
     id: "006",
-    label: "B2B",
-    alt: "Nicho B2B",
+    label: "Servicios",
+    alt: "Nicho servicios profesionales",
     color: "#1E2E1E",
     video: "https://res.cloudinary.com/dbqisatil/video/upload/v1776101274/AQPQOFP2CknFh7iZjtFDWRGeqLuiu-wE6o3L4EaKSH4XoEaxIAgPuWhJrRtB7CHuNDnCAdvL-XfWcEP_h32SaGdC627KoUHNg29_hbI_sjrjzm.mp4",
   },

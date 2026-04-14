@@ -335,7 +335,7 @@ export default function Difference() {
               textTransform: "uppercase",
             }}
           >
-            El Poder de la Estrategia
+            Por qué el sistema funciona
           </span>
           <h2
             className="font-bold uppercase mt-3"
@@ -349,10 +349,10 @@ export default function Difference() {
               maxWidth: "700px",
             }}
           >
-            Datos que explican
+            Datos que demuestran
             <br />
             por qué{" "}
-            <span style={{ color: "var(--accent)" }}>funcionamos.</span>
+            <span style={{ color: "var(--accent)" }}>vendemos.</span>
           </h2>
         </div>
       </FadeIn>
@@ -374,9 +374,10 @@ export default function Difference() {
               maxWidth: "480px",
             }}
           >
-            Cada elemento de nuestras campañas —desde la iluminación del video
-            hasta el botón de la landing— está diseñado para convertir. No
-            adivinamos: medimos, optimizamos y repetimos.
+            Cada elemento del sistema —desde el primer video hasta el botón
+            en tu landing— está diseñado para generar prospectos reales. No
+            adivinamos: medimos, optimizamos y entregamos resultados a tu
+            negocio en Puebla.
           </p>
           <a
             href="#contacto"
