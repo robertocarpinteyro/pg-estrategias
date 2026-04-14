@@ -6,7 +6,7 @@ export const services = [
       "Construimos y gestionamos tu presencia en Instagram, Facebook, TikTok y LinkedIn. Estrategia de contenido, calendario editorial, diseño de piezas visuales y seguimiento de comunidad. Tú te dedicas a tu negocio; nosotros a que te vean.",
     tags: ["Instagram", "TikTok", "Contenido", "Comunidad"],
     color: "#5C6B8A",
-    video: "/videos/redes.mp4",
+    video: "https://res.cloudinary.com/dbqisatil/video/upload/v1776124935/06b5b5888a35b51a45b6de36e891b2eb_rkw5pk.mp4",
   },
   {
     id: "02",
@@ -15,7 +15,7 @@ export const services = [
       "Campañas de Google Ads y Meta Ads estructuradas para rentabilidad, no para ego. No perseguimos la posición #1 que infla costos — apuntamos a las posiciones 2 y 3 donde están los prospectos listos para comprar. Cada peso invertido rinde resultados medibles.",
     tags: ["Google Ads", "Meta Ads", "ROI", "Performance"],
     color: "#2E4A7A",
-    video: "/videos/ads.mp4",
+    video: "https://res.cloudinary.com/dbqisatil/video/upload/v1776125071/b929285594b3e6e05299a118fc24c29a_1_osu9m0.mp4",
   },
   {
     id: "03",
@@ -24,7 +24,7 @@ export const services = [
       "Un anuncio no convierte si no captura la atención en los primeros 3 segundos. Producimos videos cinemáticos, reels, fotografía profesional y tomas aéreas con dron. Hacemos que tu producto se vea premium antes de invertir un solo peso en publicidad.",
     tags: ["Video", "Fotografía", "Dron", "Reels"],
     color: "#8B6B52",
-    video: "/videos/produccion.mp4",
+    video: "https://res.cloudinary.com/dbqisatil/video/upload/v1776125216/WhatsApp_Video_2026-04-12_at_9.24.39_PM_fbg6hb.mp4",
   },
   {
     id: "04",
@@ -33,7 +33,7 @@ export const services = [
       "Un sitio web tradicional distrae; una landing page bien construida vende. Desarrollamos desde páginas corporativas hasta landing pages ultra-enfocadas, sin puntos de fuga, conectadas directamente a tu WhatsApp o CRM para que ningún prospecto se pierda.",
     tags: ["Sitio Web", "Landing Page", "UX/UI", "SEO"],
     color: "#2E5C4A",
-    video: "/videos/web.mp4",
+    video: "https://res.cloudinary.com/dbqisatil/video/upload/v1776125164/7ae5d68a2a2f885d3cf7e4a1cd601d7c_720w_kmzzoi.mp4",
   },
 ];
 

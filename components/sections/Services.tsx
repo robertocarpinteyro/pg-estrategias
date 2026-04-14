@@ -142,20 +142,21 @@ export default function Services() {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ backgroundColor: service.color }}
               >
-                {/*
-                 * VIDEO PLACEHOLDER
-                 * Cuando tengas el archivo, reemplaza el <div> de abajo con:
-                 *   <video
-                 *     src={service.video}
-                 *     autoPlay muted loop playsInline
-                 *     className="absolute inset-0 w-full h-full object-cover"
-                 *   />
-                 */}
+                {/* Video del servicio */}
+                <video
+                  key={service.video}
+                  src={service.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
                 <div
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(160deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%)",
+                      "linear-gradient(160deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 100%)",
                   }}
                 />
 
