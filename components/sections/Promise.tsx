@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
 
-const BG_URL = "https://res.cloudinary.com/dbqisatil/image/upload/v1776120738/Gemini_Generated_Image_sx19kjsx19kjsx19_reafsa.png";
+const BG_URL = "https://res.cloudinary.com/dbqisatil/image/upload/v1776125403/Gemini_Generated_Image_5n49er5n49er5n49_1_pgoizh.png";
 
 export default function Promise() {
   const sectionRef = useRef<HTMLElement>(null);
