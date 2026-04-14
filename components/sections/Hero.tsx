@@ -13,8 +13,6 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  // Imagen visible y oscura al inicio, se blanquea completamente al scrollear
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.75], [0.2, 1]);
 
   return (
     <section
@@ -29,13 +27,21 @@ export default function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Overlay scroll-driven: transparente arriba → opaco al bajar */}
-      <motion.div
+      {/* Overlay oscuro fijo para legibilidad del texto */}
+      <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: "var(--background)",
-          opacity: overlayOpacity,
+          backgroundColor: "rgba(0,0,0,0.35)",
+          zIndex: 0,
+        }}
+      />
+      {/* Degradado de abajo hacia arriba: fondo del sitio → transparente */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to top, var(--background) 0%, rgba(244,239,232,0.6) 40%, transparent 75%)",
           zIndex: 0,
         }}
       />
