@@ -13,8 +13,8 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  // Al hacer scroll hacia abajo el overlay se vuelve completamente opaco (blanco)
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.85], [0.45, 1]);
+  // Imagen visible y oscura al inicio, se blanquea completamente al scrollear
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.75], [0.2, 1]);
 
   return (
     <section

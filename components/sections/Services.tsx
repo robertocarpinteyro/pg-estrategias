@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { services } from "@/lib/data";
 
 const PANEL_TRANSITION = { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] as const };
@@ -27,13 +27,6 @@ export default function Services() {
     target: sectionRef,
     offset: ["start start", "end end"],
   });
-
-  // Fondo blanco al llegar al final de la sección
-  const overlayOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.85, 1],
-    [1, 0, 0, 1]
-  );
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (v) => {
@@ -64,19 +57,8 @@ export default function Services() {
       {/* Sticky viewport */}
       <div
         className="sticky top-0 overflow-hidden"
-        style={{ height: "100vh", position: "relative" }}
+        style={{ height: "100vh" }}
       >
-        {/* Overlay scroll-driven: transparente en medio, blanco al entrar/salir */}
-        <motion.div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundColor: "var(--background)",
-            opacity: overlayOpacity,
-            zIndex: 30,
-            pointerEvents: "none",
-          }}
-        />
         {/* Top bar */}
         <div
           className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 md:px-8"
