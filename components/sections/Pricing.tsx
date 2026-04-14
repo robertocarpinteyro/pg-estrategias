@@ -180,18 +180,66 @@ function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
               </span>
             </div>
             {pkg.pauta && (
-              <p
+              <div
                 style={{
-                  fontSize: "0.68rem",
-                  color: "var(--accent)",
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontWeight: 600,
-                  marginTop: "0.35rem",
-                  letterSpacing: "0.02em",
+                  marginTop: "1rem",
+                  padding: "0.75rem 1rem",
+                  borderRadius: "2px",
+                  background: "linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent), color-mix(in srgb, var(--accent) 6%, transparent))",
+                  border: "1px solid color-mix(in srgb, var(--accent) 35%, transparent)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "0.75rem",
                 }}
               >
-                + ${pkg.pauta.toLocaleString("es-MX")} MXN de pauta incluida
-              </p>
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-space-grotesk)",
+                      fontSize: "0.58rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "var(--accent)",
+                      marginBottom: "0.2rem",
+                    }}
+                  >
+                    Pauta publicitaria incluida
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-space-grotesk)",
+                      fontSize: "1.4rem",
+                      fontWeight: 800,
+                      letterSpacing: "-0.03em",
+                      color: "var(--accent)",
+                      lineHeight: 1,
+                    }}
+                  >
+                    ${pkg.pauta.toLocaleString("es-MX")}
+                    <span style={{ fontSize: "0.7rem", fontWeight: 600, marginLeft: "0.25rem" }}>MXN</span>
+                  </p>
+                </div>
+                <div
+                  style={{
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "50%",
+                    backgroundColor: "var(--accent)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+              </div>
             )}
           </div>
         </div>
