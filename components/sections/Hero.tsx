@@ -4,6 +4,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { heroImages } from "@/lib/data";
 
+const BG_URL = "https://res.cloudinary.com/dbqisatil/image/upload/v1776120738/Gemini_Generated_Image_sx19kjsx19kjsx19_reafsa.png";
+
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -11,6 +13,8 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  // Al hacer scroll hacia abajo el overlay se vuelve completamente opaco (blanco)
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.85], [0.45, 1]);
 
   return (
     <section
@@ -19,19 +23,19 @@ export default function Hero() {
       className="min-h-screen flex flex-col justify-end pb-12 pt-28 overflow-hidden"
       style={{
         position: "relative",
-        backgroundImage: "url(https://res.cloudinary.com/dbqisatil/image/upload/v1776120738/Gemini_Generated_Image_sx19kjsx19kjsx19_reafsa.png)",
+        backgroundImage: `url(${BG_URL})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Overlay para mantener legibilidad del texto */}
-      <div
+      {/* Overlay scroll-driven: transparente arriba → opaco al bajar */}
+      <motion.div
         style={{
           position: "absolute",
           inset: 0,
           backgroundColor: "var(--background)",
-          opacity: 0.78,
+          opacity: overlayOpacity,
           zIndex: 0,
         }}
       />
