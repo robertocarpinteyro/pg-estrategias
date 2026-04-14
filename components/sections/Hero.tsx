@@ -27,12 +27,12 @@ export default function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Overlay oscuro fijo para legibilidad del texto */}
+      {/* Overlay oscuro para contraste del texto */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: "rgba(0,0,0,0.35)",
+          backgroundColor: "rgba(0,0,0,0.52)",
           zIndex: 0,
         }}
       />
@@ -41,7 +41,7 @@ export default function Hero() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(to top, var(--background) 0%, rgba(244,239,232,0.6) 40%, transparent 75%)",
+          background: "linear-gradient(to top, var(--background) 0%, rgba(244,239,232,0.4) 35%, transparent 65%)",
           zIndex: 0,
         }}
       />
@@ -52,7 +52,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <span className="num-label">© 2025 — AGENCIA DE MARKETING DIGITAL</span>
+          <span className="num-label" style={{ color: "rgba(255,255,255,0.6)" }}>© 2025 — AGENCIA DE MARKETING DIGITAL</span>
         </motion.div>
 
         {/* Hero headline */}
@@ -67,7 +67,7 @@ export default function Hero() {
             fontWeight: 700,
             letterSpacing: "-0.04em",
             lineHeight: 0.92,
-            color: "var(--text)",
+            color: "#ffffff",
             maxWidth: "1000px",
           }}
         >
@@ -88,7 +88,7 @@ export default function Hero() {
           <p
             className="text-base leading-relaxed"
             style={{
-              color: "var(--muted)",
+              color: "rgba(255,255,255,0.75)",
               maxWidth: "460px",
               lineHeight: 1.7,
             }}
@@ -158,7 +158,7 @@ export default function Hero() {
           />
           <span
             className="text-xs font-medium uppercase"
-            style={{ color: "var(--muted)", letterSpacing: "0.12em" }}
+            style={{ color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em" }}
           >
             Diseñado para conectar
           </span>
