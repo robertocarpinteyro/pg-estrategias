@@ -1,15 +1,14 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
-import Marquee from "@/components/sections/Marquee";
-import Statement from "@/components/sections/Statement";
-import Promise from "@/components/sections/Promise";
-import Services from "@/components/sections/Services";
-import Portfolio from "@/components/sections/Portfolio";
+import SocialProof from "@/components/sections/SocialProof";
+import Problem from "@/components/sections/Problem";
+import SistemaPG from "@/components/sections/SistemaPG";
+import WhyDifferent from "@/components/sections/WhyDifferent";
+import CasosExito from "@/components/sections/CasosExito";
 import Pricing from "@/components/sections/Pricing";
-import Difference from "@/components/sections/Difference";
-import About from "@/components/sections/About";
-import Contact from "@/components/sections/Contact";
+import FAQ from "@/components/sections/FAQ";
+import CTAFinal from "@/components/sections/CTAFinal";
 
 export default function Home() {
   return (
@@ -17,15 +16,14 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee />
-        <Statement />
-        <Promise />
-        <Services />
-        <Portfolio />
+        <SocialProof />
+        <Problem />
+        <SistemaPG />
+        <WhyDifferent />
+        <CasosExito />
         <Pricing />
-        <Difference />
-        <About />
-        <Contact />
+        <FAQ />
+        <CTAFinal />
       </main>
       <Footer />
     </>

@@ -4,13 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { waLink, WA_MESSAGES } from "@/lib/data";
 
 const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#trabajo", label: "Trabajo" },
-  { href: "#precios", label: "Paquetes" },
-  { href: "#nosotros", label: "Nosotros" },
+  { href: "#sistema", label: "Sistema PG" },
+  { href: "#casos", label: "Casos" },
+  { href: "#planes", label: "Planes" },
 ];
 
 export default function Navbar() {
@@ -65,7 +64,7 @@ export default function Navbar() {
               }}
             >
               <span style={{ color: "var(--accent)" }}>PG</span>
-              <span style={{ color: "var(--text)" }}> ESTRATEGIAS</span>
+              <span style={{ color: scrolled ? "var(--text)" : "#ffffff" }}> ESTRATEGIAS</span>
             </span>
             <span
               className="text-xs align-super"
@@ -83,27 +82,30 @@ export default function Navbar() {
                 href={link.href}
                 className="text-xs font-medium uppercase tracking-widest transition-colors duration-200"
                 style={{
-                  color: "var(--muted)",
+                  color: scrolled ? "var(--muted)" : "rgba(255,255,255,0.7)",
                   fontFamily: "var(--font-space-grotesk)",
                   letterSpacing: "0.08em",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--text)")
+                  (e.currentTarget.style.color = scrolled ? "var(--text)" : "#ffffff")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--muted)")
+                  (e.currentTarget.style.color = scrolled ? "var(--muted)" : "rgba(255,255,255,0.7)")
                 }
               >
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="#contacto"
+            <a
+              href={waLink(WA_MESSAGES.hero)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-xs font-semibold uppercase tracking-widest px-5 py-2.5 rounded-sm text-white transition-colors duration-200 cursor-pointer"
               style={{
                 backgroundColor: "var(--accent)",
                 fontFamily: "var(--font-space-grotesk)",
                 letterSpacing: "0.05em",
+                textDecoration: "none",
               }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.backgroundColor = "var(--accent-hover)")
@@ -113,7 +115,7 @@ export default function Navbar() {
               }
             >
               Contacto
-            </Link>
+            </a>
           </nav>
 
           {/* Mobile hamburger */}
@@ -127,7 +129,7 @@ export default function Navbar() {
               className="text-xs font-semibold uppercase tracking-widest mr-1"
               style={{
                 fontFamily: "var(--font-space-grotesk)",
-                color: "var(--text)",
+                color: scrolled ? "var(--text)" : "#ffffff",
                 letterSpacing: "0.08em",
               }}
             >
@@ -139,7 +141,7 @@ export default function Navbar() {
               <Menu
                 size={18}
                 strokeWidth={1.5}
-                style={{ color: "var(--text)" }}
+                style={{ color: scrolled ? "var(--text)" : "#ffffff" }}
               />
             )}
           </button>
@@ -192,17 +194,20 @@ export default function Navbar() {
                 transition={{ delay: navLinks.length * 0.06 + 0.1 }}
                 className="mt-6"
               >
-                <Link
-                  href="#contacto"
+                <a
+                  href={waLink(WA_MESSAGES.hero)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={closeMenu}
                   className="inline-block px-6 py-3.5 text-sm font-semibold uppercase tracking-widest text-white rounded-sm cursor-pointer"
                   style={{
                     backgroundColor: "var(--accent)",
                     fontFamily: "var(--font-space-grotesk)",
+                    textDecoration: "none",
                   }}
                 >
-                  Agenda tu cita gratis →
-                </Link>
+                  Agenda tu diagnóstico gratis →
+                </a>
               </motion.div>
             </nav>
           </motion.div>

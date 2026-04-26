@@ -1,61 +1,71 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { heroImages } from "@/lib/data";
+import { motion } from "framer-motion";
+import { waLink, WA_MESSAGES } from "@/lib/data";
 
-const BG_URL = "https://res.cloudinary.com/dbqisatil/image/upload/v1776120738/Gemini_Generated_Image_sx19kjsx19kjsx19_reafsa.png";
+const HERO_VIDEO = "https://res.cloudinary.com/dbqisatil/video/upload/v1776124935/06b5b5888a35b51a45b6de36e891b2eb_rkw5pk.mp4";
 
 export default function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [0, -60]);
-
   return (
     <section
       id="home"
-      ref={containerRef}
-      className="min-h-screen flex flex-col justify-end pb-12 pt-28 overflow-hidden"
-      style={{
-        position: "relative",
-        backgroundImage: `url(${BG_URL})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
-      {/* Overlay oscuro para contraste del texto */}
+      {/* Video background */}
+      <video
+        src={HERO_VIDEO}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+      />
+
+      {/* Dark overlay */}
       <div
+        className="absolute inset-0"
         style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: "rgba(0,0,0,0.52)",
-          zIndex: 0,
+          backgroundColor: "rgba(0,0,0,0.58)",
+          zIndex: 1,
         }}
       />
-      {/* Degradado de abajo hacia arriba: fondo del sitio → transparente */}
+
+      {/* Bottom gradient to background color */}
       <div
+        className="absolute inset-0"
         style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(to top, var(--background) 0%, rgba(244,239,232,0.4) 35%, transparent 65%)",
-          zIndex: 0,
+          background: "linear-gradient(to top, var(--background) 0%, rgba(244,239,232,0.2) 30%, transparent 60%)",
+          zIndex: 1,
         }}
       />
-      <div className="px-5 md:px-8 max-w-7xl mx-auto w-full" style={{ position: "relative", zIndex: 1 }}>
+
+      {/* Content */}
+      <div
+        className="relative px-5 md:px-8 max-w-7xl mx-auto w-full pt-28 pb-20"
+        style={{ zIndex: 2 }}
+      >
         {/* Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <span className="num-label" style={{ color: "rgba(255,255,255,0.6)" }}>© 2025 — SISTEMA DE VENTAS DIGITALES · PUEBLA</span>
+          <span
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              fontSize: "0.65rem",
+              fontWeight: 600,
+              letterSpacing: "0.14em",
+              color: "rgba(255,255,255,0.5)",
+              textTransform: "uppercase",
+            }}
+          >
+            Growth Partner · Puebla
+          </span>
         </motion.div>
 
-        {/* Hero headline */}
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -63,187 +73,93 @@ export default function Hero() {
           className="mt-5 mb-8 font-bold uppercase"
           style={{
             fontFamily: "var(--font-space-grotesk)",
-            fontSize: "clamp(3rem, 8.5vw, 9rem)",
+            fontSize: "clamp(2.2rem, 6vw, 5.5rem)",
             fontWeight: 700,
             letterSpacing: "-0.04em",
-            lineHeight: 0.92,
+            lineHeight: 0.95,
             color: "#ffffff",
-            maxWidth: "1000px",
+            maxWidth: "900px",
           }}
         >
-          Haz que tu<br />
-          teléfono no{" "}
-          <span style={{ color: "var(--accent)" }}>deje</span>
+          Diseñamos, activamos
           <br />
-          de sonar.
+          y escalamos{" "}
+          <span style={{ color: "var(--accent)" }}>sistemas de
+          <br />
+          crecimiento</span> para
+          <br />
+          negocios locales.
         </motion.h1>
 
-        {/* Sub-row */}
-        <motion.div
+        {/* Subtext */}
+        <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.55 }}
-          className="flex flex-col md:flex-row items-start md:items-end gap-6 md:gap-16"
+          className="text-base leading-relaxed mb-10"
+          style={{
+            color: "rgba(255,255,255,0.75)",
+            maxWidth: "540px",
+            lineHeight: 1.7,
+          }}
         >
-          <p
-            className="text-base leading-relaxed"
-            style={{
-              color: "rgba(255,255,255,0.75)",
-              maxWidth: "460px",
-              lineHeight: 1.7,
-            }}
-          >
-            No métricas de vanidad — prospectos reales en tu WhatsApp,
-            mes a mes. Un sistema de ventas completo para restaurantes,
-            constructoras y servicios profesionales en Angelópolis,
-            Zavaleta y Cholula.
-          </p>
-          <div className="flex items-center gap-4 shrink-0">
-            <a
-              href="#contacto"
-              className="px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white rounded-sm transition-all duration-200 cursor-pointer"
-              style={{
-                backgroundColor: "var(--accent)",
-                fontFamily: "var(--font-space-grotesk)",
-                letterSpacing: "0.04em",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--accent-hover)";
-                e.currentTarget.style.transform = "translateY(-1px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--accent)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              Agenda tu cita gratis
-            </a>
-            <a
-              href="#servicios"
-              className="px-6 py-3 text-sm font-semibold uppercase tracking-wide rounded-sm transition-all duration-200 cursor-pointer"
-              style={{
-                border: "1px solid var(--border)",
-                color: "var(--text)",
-                fontFamily: "var(--font-space-grotesk)",
-                letterSpacing: "0.04em",
-                textDecoration: "none",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--accent)";
-                e.currentTarget.style.color = "var(--accent)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.color = "var(--text)";
-              }}
-            >
-              Ver servicios
-            </a>
-          </div>
-        </motion.div>
+          Tu Growth Partner: conectamos estrategia, producción, pauta y
+          tecnología en un solo motor. Construimos crecimiento con método,
+          datos y visión.
+        </motion.p>
 
-        {/* Divider labels */}
+        {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.8 }}
-          className="mt-12 flex items-center gap-3"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.7 }}
+          className="flex flex-col sm:flex-row items-start gap-4"
         >
-          <div
+          <a
+            href={waLink(WA_MESSAGES.hero)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-white rounded-sm transition-all duration-200 cursor-pointer"
             style={{
-              width: "36px",
-              height: "1px",
               backgroundColor: "var(--accent)",
+              fontFamily: "var(--font-space-grotesk)",
+              letterSpacing: "0.04em",
+              textDecoration: "none",
             }}
-          />
-          <span
-            className="text-xs font-medium uppercase"
-            style={{ color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em" }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "var(--accent-hover)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "var(--accent)";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
           >
-            Para negocios en Angelópolis · Zavaleta · Cholula
-          </span>
+            Agenda tu diagnóstico gratuito
+          </a>
+          <a
+            href="#casos"
+            className="px-7 py-3.5 text-sm font-semibold uppercase tracking-wide rounded-sm transition-all duration-200 cursor-pointer"
+            style={{
+              border: "1px solid rgba(255,255,255,0.3)",
+              color: "rgba(255,255,255,0.85)",
+              fontFamily: "var(--font-space-grotesk)",
+              letterSpacing: "0.04em",
+              textDecoration: "none",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "var(--accent)";
+              e.currentTarget.style.color = "var(--accent)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.85)";
+            }}
+          >
+            Ver casos
+          </a>
         </motion.div>
       </div>
-
-      {/* Photo strip */}
-      <motion.div
-        style={{ y, position: "relative", zIndex: 1 }}
-        className="mt-14 px-5 md:px-8"
-      >
-        <div className="max-w-7xl mx-auto grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
-          {heroImages.map((img, i) => (
-            <motion.div
-              key={img.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.6 + i * 0.1,
-                ease: [0.25, 0.1, 0.25, 1],
-              }}
-              className="relative overflow-hidden rounded-sm group cursor-pointer"
-              style={{
-                aspectRatio: "3/4",
-                backgroundColor: img.color,
-              }}
-            >
-              {/* Video (cuando hay URL) o color de fondo */}
-              {img.video ? (
-                <video
-                  src={img.video}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              ) : null}
-
-              {/* Gradient overlay */}
-              <div
-                className="absolute inset-0 transition-opacity duration-300"
-                style={{
-                  background:
-                    "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)",
-                  opacity: img.video ? 1 : 0.7,
-                }}
-              />
-              {/* Hover overlay */}
-              <div
-                className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-10 opacity-0"
-                style={{ backgroundColor: "var(--accent)" }}
-              />
-              {/* Number label */}
-              <span
-                className="absolute top-3 right-3 text-white"
-                style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontSize: "0.65rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.05em",
-                  opacity: 0.6,
-                }}
-              >
-                {img.id}
-              </span>
-              {/* Bottom label */}
-              <div className="absolute bottom-3 left-3 right-3">
-                <p
-                  className="text-white uppercase leading-tight"
-                  style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.75rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  {img.label}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
     </section>
   );
 }

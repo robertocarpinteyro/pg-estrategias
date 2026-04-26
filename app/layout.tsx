@@ -17,15 +17,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "PG Estrategias — Sistema de Ventas Digitales · Puebla",
+  title: "PG Estrategias — Tu Growth Partner para escalar tu negocio local",
   description:
-    "Hacemos que tu teléfono no deje de sonar. Sistema de ventas digitales para restaurantes, constructoras y servicios profesionales en Angelópolis, Zavaleta y Cholula.",
+    "Estudio de Crecimiento para negocios locales que ya facturan y quieren escalar. Diseñamos y operamos el sistema que convierte tu inversión en marketing en clientes reales.",
   keywords:
-    "sistema de ventas digitales, puebla, angelópolis, zavaleta, cholula, meta ads, google ads, landing pages, pymes puebla, marketing puebla",
+    "growth partner, puebla, estudio de crecimiento, sistema de ventas, meta ads, google ads, landing pages, pymes puebla, marketing puebla, negocios locales",
   openGraph: {
-    title: "PG Estrategias — Sistema de Ventas Digitales · Puebla",
+    title: "PG Estrategias — Tu Growth Partner para escalar tu negocio local",
     description:
-      "No marketing. Un sistema que pone prospectos reales en tu WhatsApp, mes a mes. Para PYMES en Puebla.",
+      "Diseñamos y operamos el sistema que convierte tu inversión en marketing en clientes reales — no en likes. Agenda tu Diagnóstico de Crecimiento gratuito.",
     type: "website",
     locale: "es_MX",
   },

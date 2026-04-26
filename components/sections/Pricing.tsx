@@ -1,16 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
-import { paquetes, addOns } from "@/lib/data";
+import { paquetes, waLink, WA_MESSAGES } from "@/lib/data";
 import { Check } from "lucide-react";
-
-const WA_NUMBER = "5212221215051";
-
-function waLink(msg: string) {
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-}
 
 type Paquete = typeof paquetes[0];
 
@@ -40,7 +33,6 @@ function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
           overflow: "hidden",
         }}
       >
-        {/* Top accent line for destacado */}
         {pkg.destacado && (
           <div
             style={{
@@ -71,18 +63,6 @@ function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
               flexWrap: "wrap",
             }}
           >
-            <span
-              style={{
-                fontFamily: "var(--font-space-grotesk)",
-                fontSize: "0.6rem",
-                fontWeight: 600,
-                letterSpacing: "0.14em",
-                color: "var(--muted)",
-                textTransform: "uppercase",
-              }}
-            >
-              {pkg.categoria}
-            </span>
             {pkg.destacado && (
               <span
                 style={{
@@ -123,7 +103,7 @@ function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
           <h3
             style={{
               fontFamily: "var(--font-space-grotesk)",
-              fontSize: "1rem",
+              fontSize: "1.05rem",
               fontWeight: 700,
               letterSpacing: "-0.02em",
               color: "var(--text)",
@@ -287,7 +267,6 @@ function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
 
         {/* Footer */}
         <div style={{ padding: "1.25rem 1.75rem 1.75rem" }}>
-          {/* Notes */}
           {pkg.notas.length > 0 && (
             <div style={{ marginBottom: "1rem" }}>
               {pkg.notas.map((nota, i) => (
@@ -347,7 +326,7 @@ function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
               }
             }}
           >
-            Solicitar este paquete →
+            Quiero este plan →
           </a>
         </div>
       </div>
@@ -356,12 +335,12 @@ function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
 }
 
 export default function Pricing() {
-  const iniciales = paquetes.filter((p) => p.categoria === "Paquete Inicial");
-  const avanzados = paquetes.filter((p) => p.categoria === "Paquete Avanzado");
+  const tier1 = paquetes.filter((p) => p.categoria === "Construir bases");
+  const tier2 = paquetes.filter((p) => p.categoria === "Activar crecimiento");
 
   return (
     <section
-      id="precios"
+      id="planes"
       className="py-24 md:py-36 px-5 md:px-8 max-w-7xl mx-auto"
       style={{ borderTop: "1px solid var(--border)" }}
     >
@@ -379,7 +358,7 @@ export default function Pricing() {
                 textTransform: "uppercase",
               }}
             >
-              Precios & Paquetes
+              Nuestros Planes
             </span>
             <h2
               className="font-bold mt-3 uppercase"
@@ -405,168 +384,89 @@ export default function Pricing() {
               lineHeight: 1.8,
             }}
           >
-            Precios en MXN. Sin contratos anuales forzosos. Escala a tu ritmo
-            — empieza chico y crece con nosotros.
+            Precios en MXN. Escala a tu ritmo.
           </p>
         </div>
       </FadeIn>
 
-      {/* ── Paquetes Iniciales ── */}
+      {/* ── TIER 1: Construir bases ── */}
       <div className="mb-4">
         <FadeIn>
-          <p
+          <div
             style={{
-              fontFamily: "var(--font-space-grotesk)",
-              fontSize: "0.6rem",
-              fontWeight: 600,
-              letterSpacing: "0.16em",
-              color: "var(--muted)",
-              textTransform: "uppercase",
               marginBottom: "1rem",
               paddingBottom: "0.75rem",
               borderBottom: "1px solid var(--border)",
             }}
           >
-            Paquetes Iniciales
-          </p>
+            <p
+              style={{
+                fontFamily: "var(--font-space-grotesk)",
+                fontSize: "0.7rem",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                color: "var(--accent)",
+                textTransform: "uppercase",
+                marginBottom: "0.3rem",
+              }}
+            >
+              Tier 1 · Construir bases
+            </p>
+            <p
+              style={{
+                fontSize: "0.75rem",
+                color: "var(--muted)",
+                lineHeight: 1.6,
+              }}
+            >
+              Para negocios que están armando su presencia digital antes de invertir en pauta.
+            </p>
+          </div>
         </FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {iniciales.map((pkg, i) => (
+          {tier1.map((pkg, i) => (
             <PriceCard key={pkg.id} pkg={pkg} delay={i * 0.08} />
           ))}
         </div>
       </div>
 
-      {/* ── Paquetes Avanzados ── */}
+      {/* ── TIER 2: Activar crecimiento ── */}
       <div className="mt-10 mb-4">
         <FadeIn>
-          <p
+          <div
             style={{
-              fontFamily: "var(--font-space-grotesk)",
-              fontSize: "0.6rem",
-              fontWeight: 600,
-              letterSpacing: "0.16em",
-              color: "var(--muted)",
-              textTransform: "uppercase",
               marginBottom: "1rem",
               paddingBottom: "0.75rem",
               borderBottom: "1px solid var(--border)",
             }}
           >
-            Paquetes Avanzados
-          </p>
+            <p
+              style={{
+                fontFamily: "var(--font-space-grotesk)",
+                fontSize: "0.7rem",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                color: "var(--accent)",
+                textTransform: "uppercase",
+                marginBottom: "0.3rem",
+              }}
+            >
+              Tier 2 · Activar crecimiento
+            </p>
+            <p
+              style={{
+                fontSize: "0.75rem",
+                color: "var(--muted)",
+                lineHeight: 1.6,
+              }}
+            >
+              Para negocios listos para invertir en pauta y construir un motor de adquisición predecible.
+            </p>
+          </div>
         </FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {avanzados.map((pkg, i) => (
+          {tier2.map((pkg, i) => (
             <PriceCard key={pkg.id} pkg={pkg} delay={i * 0.08} />
-          ))}
-        </div>
-      </div>
-
-      {/* ── Add-ons ── */}
-      <div className="mt-10">
-        <FadeIn>
-          <p
-            style={{
-              fontFamily: "var(--font-space-grotesk)",
-              fontSize: "0.6rem",
-              fontWeight: 600,
-              letterSpacing: "0.16em",
-              color: "var(--muted)",
-              textTransform: "uppercase",
-              marginBottom: "1rem",
-              paddingBottom: "0.75rem",
-              borderBottom: "1px solid var(--border)",
-            }}
-          >
-            Complementos
-          </p>
-        </FadeIn>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {addOns.map((addon, i) => (
-            <FadeIn key={addon.id} delay={i * 0.08}>
-              <div
-                style={{
-                  border: "1px solid var(--border)",
-                  borderRadius: "2px",
-                  padding: "1.5rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.5rem",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.6rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.14em",
-                    color: "var(--muted)",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Add-on
-                </span>
-                <h4
-                  style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "1rem",
-                    fontWeight: 700,
-                    letterSpacing: "-0.02em",
-                    color: "var(--text)",
-                  }}
-                >
-                  {addon.nombre}
-                </h4>
-                <p
-                  style={{
-                    fontSize: "0.75rem",
-                    color: "var(--muted)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {addon.descripcion}
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    gap: "0.25rem",
-                    marginTop: "0.25rem",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-space-grotesk)",
-                      fontSize: "1.6rem",
-                      fontWeight: 800,
-                      letterSpacing: "-0.04em",
-                      color: "var(--text)",
-                    }}
-                  >
-                    ${addon.precio.toLocaleString("es-MX")}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "0.7rem",
-                      color: "var(--muted)",
-                      fontFamily: "var(--font-space-grotesk)",
-                    }}
-                  >
-                    MXN
-                  </span>
-                </div>
-                <p
-                  style={{
-                    fontSize: "0.62rem",
-                    color: "var(--muted)",
-                    opacity: 0.7,
-                  }}
-                >
-                  * {addon.nota}
-                </p>
-              </div>
-            </FadeIn>
           ))}
         </div>
       </div>
@@ -582,23 +482,33 @@ export default function Pricing() {
             backgroundColor: "var(--card-bg)",
           }}
         >
-          <p
-            style={{
-              fontSize: "0.78rem",
-              color: "var(--muted)",
-              lineHeight: 1.8,
-              flex: 1,
-            }}
-          >
-            ¿No encuentras el paquete ideal para tu negocio?{" "}
-            <strong style={{ color: "var(--text)", fontWeight: 600 }}>
-              Armamos propuestas a la medida.
-            </strong>{" "}
-            Contáctanos y en menos de 24 horas te enviamos una cotización
-            personalizada sin compromiso.
-          </p>
+          <div style={{ flex: 1 }}>
+            <p
+              style={{
+                fontSize: "0.78rem",
+                color: "var(--muted)",
+                lineHeight: 1.8,
+              }}
+            >
+              Los planes avanzados incluyen un piso de pauta gestionado por nosotros.
+              Si quieres invertir más para acelerar resultados, lo agregamos sobre la base.
+            </p>
+            <p
+              style={{
+                fontSize: "0.78rem",
+                color: "var(--muted)",
+                lineHeight: 1.8,
+                marginTop: "0.5rem",
+              }}
+            >
+              <strong style={{ color: "var(--text)", fontWeight: 600 }}>
+                ¿No estás seguro cuál te corresponde?
+              </strong>{" "}
+              Agenda tu diagnóstico gratuito.
+            </p>
+          </div>
           <a
-            href={waLink("Hola, me gustaría solicitar una cotización personalizada para mi negocio. ¿Podrían ayudarme?")}
+            href={waLink(WA_MESSAGES.faq)}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -623,7 +533,7 @@ export default function Pricing() {
               e.currentTarget.style.backgroundColor = "var(--accent)";
             }}
           >
-            Pedir cotización gratis →
+            Agendar diagnóstico →
           </a>
         </div>
       </FadeIn>
