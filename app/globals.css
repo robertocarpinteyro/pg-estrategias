@@ -55,6 +55,28 @@ body {
   color: #fff;
 }
 
+/* Marquee — hero clients */
+@keyframes pg-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.pg-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: pg-marquee 22s linear infinite;
+}
+
+/* Marquee — backed-by strip */
+@keyframes pg-backers-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.pg-backers-track {
+  display: flex;
+  width: max-content;
+  animation: pg-backers-marquee 30s linear infinite;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

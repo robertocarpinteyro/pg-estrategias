@@ -100,7 +100,7 @@ export default function Navbar() {
               href={waLink(WA_MESSAGES.hero)}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-semibold uppercase tracking-widest px-5 py-2.5 rounded-sm text-white transition-colors duration-200 cursor-pointer"
+              className="text-xs font-semibold uppercase tracking-widest px-5 py-2.5 rounded-full text-white transition-colors duration-200 cursor-pointer"
               style={{
                 backgroundColor: "var(--accent)",
                 fontFamily: "var(--font-space-grotesk)",
@@ -199,7 +199,7 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}
-                  className="inline-block px-6 py-3.5 text-sm font-semibold uppercase tracking-widest text-white rounded-sm cursor-pointer"
+                  className="inline-block px-6 py-3.5 text-sm font-semibold uppercase tracking-widest text-white rounded-full cursor-pointer"
                   style={{
                     backgroundColor: "var(--accent)",
                     fontFamily: "var(--font-space-grotesk)",
