@@ -6,7 +6,7 @@ import Problem from "@/components/sections/Problem";
 import SistemaPG from "@/components/sections/SistemaPG";
 import WhyDifferent from "@/components/sections/WhyDifferent";
 import CasosExito from "@/components/sections/CasosExito";
-import Pricing from "@/components/sections/Pricing";
+import Calculator from "@/components/sections/Calculator";
 import FAQ from "@/components/sections/FAQ";
 import CTAFinal from "@/components/sections/CTAFinal";
 
@@ -21,7 +21,7 @@ export default function Home() {
         <SistemaPG />
         <WhyDifferent />
         <CasosExito />
-        <Pricing />
+        <Calculator />
         <FAQ />
         <CTAFinal />
       </main>
