@@ -2,72 +2,43 @@
 
 import { useState } from "react";
 import { Check, ArrowRight } from "lucide-react";
-import { waLink, WA_MESSAGES } from "@/lib/data";
+import { paquetes, waLink } from "@/lib/data";
 
-type ServiceType = "contenido" | "pauta" | "sistema";
-type Compromiso = "mensual" | "trimestral" | "semestral";
+// ── Types ─────────────────────────────────────────────────────────────────────
 
-const serviceOptions: { value: ServiceType; label: string; description: string }[] = [
-  {
-    value: "contenido",
-    label: "Contenido y Redes",
-    description: "Estrategia, producción audiovisual y gestión de redes sociales",
-  },
-  {
-    value: "pauta",
-    label: "Pauta y Conversión",
-    description: "Ads en Meta y Google + landing pages y automatización",
-  },
-  {
-    value: "sistema",
-    label: "Sistema Completo",
-    description: "Estrategia, contenido, pauta y tecnología integrados en un motor",
-  },
-];
+type PautaType = "sin-pauta" | "pauta-basica" | "pauta-avanzada";
+type Reunion = "mensual" | "quincenal";
 
-const compromisoOptions: { value: Compromiso; label: string; suffix: string }[] = [
-  { value: "trimestral", label: "3 meses (mínimo estándar)", suffix: "precio normal" },
-  { value: "semestral", label: "6 meses", suffix: "8% descuento" },
-  { value: "mensual", label: "Mes a mes", suffix: "sin permanencia" },
-];
+// ── Plan recommendation ───────────────────────────────────────────────────────
+// Maps form selections to one of the 5 existing paquetes (index 0–4):
+// 0: Cimiento  1: Cimiento Plus  2: Tracción  3: Aceleración  4: Dominio
 
-const intensityLabels = ["Básico", "Inicial", "Estándar", "Avanzado", "Premium"];
-
-const ACCENT = "var(--accent)";
-
-// ── Pricing logic ──────────────────────────────────────────────────────────────
-
-function calculatePrice(
-  service: ServiceType,
-  intensity: number,
-  needVideo: boolean,
-  needAuto: boolean,
-  compromiso: Compromiso
-) {
-  const bases: Record<ServiceType, number> = { contenido: 7500, pauta: 8500, sistema: 11000 };
-  const perLevel: Record<ServiceType, number> = { contenido: 1200, pauta: 1500, sistema: 2500 };
-  let total = bases[service] + (intensity - 1) * perLevel[service];
-  if (needVideo) total += 2000;
-  if (needAuto) total += 1500;
-  if (compromiso === "semestral") total = Math.round(total * 0.92);
-  return total;
+function getRecommendedIndex(
+  pauta: PautaType,
+  piezas: number,
+  branding: boolean,
+  mensajeria: boolean,
+  reunion: Reunion
+): number {
+  if (pauta === "pauta-avanzada") return 4; // Dominio
+  if (pauta === "pauta-basica") {
+    if (piezas >= 16 || mensajeria) return 3; // Aceleración
+    return 2; // Tracción
+  }
+  // Tier 1 — sin pauta
+  if (branding || piezas >= 15 || reunion === "quincenal") return 1; // Cimiento Plus
+  return 0; // Cimiento
 }
 
-function calculateAgency(service: ServiceType, intensity: number) {
-  const bases: Record<ServiceType, number> = { contenido: 18000, pauta: 22000, sistema: 28000 };
-  const perLevel: Record<ServiceType, number> = { contenido: 3000, pauta: 4000, sistema: 6000 };
-  return bases[service] + (intensity - 1) * perLevel[service];
-}
-
-function calculateFreelancer(service: ServiceType, intensity: number) {
-  const bases: Record<ServiceType, number> = { contenido: 9000, pauta: 11000, sistema: 14000 };
-  const perLevel: Record<ServiceType, number> = { contenido: 1500, pauta: 2000, sistema: 3000 };
-  return bases[service] + (intensity - 1) * perLevel[service];
-}
+// Comparison reference prices (approximate market rates)
+const agencyEstimates = [18000, 24000, 28000, 38000, 65000];
+const freelancerEstimates = [11000, 15000, 18000, 24000, 42000];
 
 const fmt = (n: number) => "$" + n.toLocaleString("es-MX");
 
-// ── Subcomponents ─────────────────────────────────────────────────────────────
+// ── Sub-components ────────────────────────────────────────────────────────────
+
+const ACCENT = "var(--accent)";
 
 function RadioCircle({ active }: { active: boolean }) {
   return (
@@ -86,9 +57,7 @@ function RadioCircle({ active }: { active: boolean }) {
       }}
     >
       {active && (
-        <div
-          style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: ACCENT }}
-        />
+        <div style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: ACCENT }} />
       )}
     </div>
   );
@@ -118,19 +87,21 @@ function Checkbox({ checked }: { checked: boolean }) {
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function Calculator() {
-  const [service, setService] = useState<ServiceType>("sistema");
-  const [intensity, setIntensity] = useState(3);
-  const [needVideo, setNeedVideo] = useState(false);
-  const [needAuto, setNeedAuto] = useState(false);
-  const [compromiso, setCompromiso] = useState<Compromiso>("trimestral");
+  const [pauta, setPauta] = useState<PautaType>("pauta-basica");
+  const [piezas, setPiezas] = useState(12);
+  const [branding, setBranding] = useState(false);
+  const [mensajeria, setMensajeria] = useState(false);
+  const [reunion, setReunion] = useState<Reunion>("quincenal");
 
-  const price = calculatePrice(service, intensity, needVideo, needAuto, compromiso);
-  const agency = calculateAgency(service, intensity);
-  const freelancer = calculateFreelancer(service, intensity);
-  const savings = Math.round((1 - price / agency) * 100);
+  const idx = getRecommendedIndex(pauta, piezas, branding, mensajeria, reunion);
+  const plan = paquetes[idx];
+  const pgTotal = plan.precio + (plan.pauta ?? 0);
+  const agencyPrice = agencyEstimates[idx];
+  const freelancerPrice = freelancerEstimates[idx];
+  const savings = Math.round((1 - pgTotal / agencyPrice) * 100);
 
-  // Slider track gradient
-  const sliderPct = ((intensity - 1) / 4) * 100;
+  // Slider track fill
+  const sliderPct = ((piezas - 10) / 10) * 100;
   const sliderBg = `linear-gradient(to right, var(--accent) 0%, var(--accent) ${sliderPct}%, #2A2A2A ${sliderPct}%, #2A2A2A 100%)`;
 
   return (
@@ -178,11 +149,12 @@ export default function Calculator() {
               maxWidth: "440px",
             }}
           >
-            Ajusta las opciones y obtén una estimación personalizada al instante.
+            Ajusta las opciones y el sistema te recomienda el paquete exacto que
+            ya tenemos diseñado para tu etapa.
           </p>
         </div>
 
-        {/* ── 2-col grid ── */}
+        {/* ── Calculator grid ── */}
         <div
           className="grid grid-cols-1 lg:grid-cols-2 rounded-2xl overflow-hidden"
           style={{ border: "1px solid #1E1E1E" }}
@@ -191,7 +163,7 @@ export default function Calculator() {
           {/* ════ LEFT — form ════ */}
           <div style={{ backgroundColor: "#0D0D0D", padding: "3rem" }}>
 
-            {/* 1. Tipo de servicio */}
+            {/* 1. Pauta publicitaria */}
             <div style={{ paddingBottom: "2rem", borderBottom: "1px solid #1E1E1E" }}>
               <h3
                 style={{
@@ -203,24 +175,40 @@ export default function Calculator() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                ¿Qué servicio necesitas?
+                ¿Necesitas pauta publicitaria?
               </h3>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                {serviceOptions.map((opt) => (
+                {[
+                  {
+                    value: "sin-pauta" as PautaType,
+                    label: "No por ahora",
+                    description: "Me enfoco en construir presencia y contenido orgánico",
+                  },
+                  {
+                    value: "pauta-basica" as PautaType,
+                    label: "Sí, Meta y Google Ads",
+                    description: "Anuncios gestionados para generar clientes de forma activa",
+                  },
+                  {
+                    value: "pauta-avanzada" as PautaType,
+                    label: "Sí, con alta inversión",
+                    description: "Estrategia publicitaria avanzada para dominar mi mercado",
+                  },
+                ].map((opt) => (
                   <button
                     key={opt.value}
-                    onClick={() => setService(opt.value)}
+                    onClick={() => setPauta(opt.value)}
                     className="flex items-start gap-3 text-left cursor-pointer w-full"
                     style={{ background: "none", border: "none", padding: 0 }}
                   >
-                    <RadioCircle active={service === opt.value} />
+                    <RadioCircle active={pauta === opt.value} />
                     <div>
                       <p
                         style={{
                           fontFamily: "var(--font-space-grotesk)",
                           fontSize: "0.88rem",
                           fontWeight: 600,
-                          color: service === opt.value ? "#ffffff" : "#777777",
+                          color: pauta === opt.value ? "#ffffff" : "#777777",
                           transition: "color 0.2s",
                           lineHeight: 1.2,
                         }}
@@ -243,7 +231,7 @@ export default function Calculator() {
               </div>
             </div>
 
-            {/* 2. Intensidad */}
+            {/* 2. Piezas de contenido */}
             <div
               style={{
                 paddingTop: "2rem",
@@ -261,8 +249,8 @@ export default function Calculator() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                Nivel de intensidad:{" "}
-                <span style={{ color: ACCENT }}>{intensityLabels[intensity - 1]}</span>
+                Piezas de contenido al mes:{" "}
+                <span style={{ color: ACCENT }}>{piezas}</span>
               </h3>
               <p
                 style={{
@@ -272,15 +260,15 @@ export default function Calculator() {
                   lineHeight: 1.5,
                 }}
               >
-                Define el ritmo de contenido y el alcance de la gestión mensual
+                Artes, reels, carruseles y video que publicamos mensualmente
               </p>
               <input
                 type="range"
-                min={1}
-                max={5}
+                min={10}
+                max={20}
                 step={1}
-                value={intensity}
-                onChange={(e) => setIntensity(Number(e.target.value))}
+                value={piezas}
+                onChange={(e) => setPiezas(Number(e.target.value))}
                 className="pg-slider"
                 style={{ background: sliderBg }}
               />
@@ -291,28 +279,16 @@ export default function Calculator() {
                   marginTop: "0.6rem",
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.62rem",
-                    color: "#444444",
-                  }}
-                >
-                  Básico
+                <span style={{ fontFamily: "var(--font-space-grotesk)", fontSize: "0.62rem", color: "#444444" }}>
+                  10 piezas
                 </span>
-                <span
-                  style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.62rem",
-                    color: "#444444",
-                  }}
-                >
-                  Premium
+                <span style={{ fontFamily: "var(--font-space-grotesk)", fontSize: "0.62rem", color: "#444444" }}>
+                  20 piezas
                 </span>
               </div>
             </div>
 
-            {/* 3. Add-ons */}
+            {/* 3. Extras */}
             <div
               style={{
                 paddingTop: "2rem",
@@ -330,23 +306,21 @@ export default function Calculator() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                Servicios adicionales
+                ¿Necesitas algo más?
               </h3>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 {[
                   {
-                    key: "video",
-                    label: "Mayor producción de video",
-                    price: "+$2,000/mes",
-                    checked: needVideo,
-                    toggle: () => setNeedVideo((v) => !v),
+                    key: "branding",
+                    label: "Branding: logo y paleta de marca",
+                    checked: branding,
+                    toggle: () => setBranding((v) => !v),
                   },
                   {
-                    key: "auto",
+                    key: "mensajeria",
                     label: "Mensajería masiva y automatización",
-                    price: "+$1,500/mes",
-                    checked: needAuto,
-                    toggle: () => setNeedAuto((v) => !v),
+                    checked: mensajeria,
+                    toggle: () => setMensajeria((v) => !v),
                   },
                 ].map((item) => (
                   <button
@@ -368,23 +342,12 @@ export default function Calculator() {
                     >
                       {item.label}
                     </span>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-space-grotesk)",
-                        fontSize: "0.78rem",
-                        fontWeight: 600,
-                        color: ACCENT,
-                        flexShrink: 0,
-                      }}
-                    >
-                      {item.price}
-                    </span>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* 4. Compromiso */}
+            {/* 4. Frecuencia de reuniones */}
             <div style={{ paddingTop: "2rem" }}>
               <h3
                 style={{
@@ -396,43 +359,37 @@ export default function Calculator() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                ¿Cuál es tu compromiso?
+                ¿Con qué frecuencia quieres reuniones?
               </h3>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                {compromisoOptions.map((opt) => (
+                {[
+                  { value: "mensual" as Reunion, label: "Mensual", description: "Una reunión de seguimiento al mes" },
+                  { value: "quincenal" as Reunion, label: "Quincenal", description: "Seguimiento más cercano cada dos semanas" },
+                ].map((opt) => (
                   <button
                     key={opt.value}
-                    onClick={() => setCompromiso(opt.value)}
-                    className="flex items-center gap-3 cursor-pointer w-full"
+                    onClick={() => setReunion(opt.value)}
+                    className="flex items-start gap-3 text-left cursor-pointer w-full"
                     style={{ background: "none", border: "none", padding: 0 }}
                   >
-                    <RadioCircle active={compromiso === opt.value} />
-                    <span
-                      style={{
-                        fontFamily: "var(--font-space-grotesk)",
-                        fontSize: "0.85rem",
-                        color: compromiso === opt.value ? "#ffffff" : "#777777",
-                        flex: 1,
-                        textAlign: "left",
-                        transition: "color 0.2s",
-                      }}
-                    >
-                      {opt.label}
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-space-grotesk)",
-                        fontSize: "0.72rem",
-                        color:
-                          opt.value === "semestral"
-                            ? ACCENT
-                            : opt.value === "mensual"
-                            ? "#555555"
-                            : "#666666",
-                      }}
-                    >
-                      {opt.suffix}
-                    </span>
+                    <RadioCircle active={reunion === opt.value} />
+                    <div>
+                      <p
+                        style={{
+                          fontFamily: "var(--font-space-grotesk)",
+                          fontSize: "0.88rem",
+                          fontWeight: 600,
+                          color: reunion === opt.value ? "#ffffff" : "#777777",
+                          transition: "color 0.2s",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {opt.label}
+                      </p>
+                      <p style={{ fontSize: "0.72rem", color: "#484848", marginTop: "0.2rem" }}>
+                        {opt.description}
+                      </p>
+                    </div>
                   </button>
                 ))}
               </div>
@@ -448,38 +405,86 @@ export default function Calculator() {
               flexDirection: "column",
             }}
           >
-            <h3
-              style={{
-                fontFamily: "var(--font-space-grotesk)",
-                fontSize: "1.2rem",
-                fontWeight: 700,
-                letterSpacing: "-0.02em",
-                color: "var(--text)",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Inversión estimada
-            </h3>
-            <p
-              style={{
-                fontSize: "0.82rem",
-                color: "var(--muted)",
-                lineHeight: 1.7,
-                marginBottom: "2rem",
-                maxWidth: "340px",
-              }}
-            >
-              Precios mensuales de referencia. Los detalles exactos se confirman en
-              tu Diagnóstico de Crecimiento gratuito.
-            </p>
+            {/* Plan recomendado */}
+            <div style={{ marginBottom: "1.75rem" }}>
+              <p
+                style={{
+                  fontFamily: "var(--font-space-grotesk)",
+                  fontSize: "0.62rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: ACCENT,
+                  marginBottom: "0.4rem",
+                }}
+              >
+                Plan recomendado para ti
+              </p>
+              <h3
+                style={{
+                  fontFamily: "var(--font-space-grotesk)",
+                  fontSize: "1.5rem",
+                  fontWeight: 700,
+                  letterSpacing: "-0.03em",
+                  color: "var(--text)",
+                  marginBottom: "0.5rem",
+                  lineHeight: 1.1,
+                }}
+              >
+                {plan.nombre}
+              </h3>
+              <p
+                style={{
+                  fontSize: "0.82rem",
+                  color: "var(--muted)",
+                  lineHeight: 1.7,
+                  maxWidth: "360px",
+                }}
+              >
+                {plan.descripcion}
+              </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", flex: 1 }}>
+              {/* Top 3 features */}
+              <div style={{ marginTop: "1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                {plan.features.slice(0, 3).map((f, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <div
+                      style={{
+                        width: 16,
+                        height: 16,
+                        borderRadius: "50%",
+                        backgroundColor: ACCENT,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        marginTop: 2,
+                      }}
+                    >
+                      <Check size={9} style={{ color: "#fff" }} strokeWidth={3} />
+                    </div>
+                    <p
+                      style={{
+                        fontSize: "0.75rem",
+                        color: "var(--muted)",
+                        lineHeight: 1.55,
+                      }}
+                    >
+                      {f.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Comparison cards */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem", flex: 1 }}>
 
               {/* Agencia */}
               <div
                 style={{
                   borderRadius: "1rem",
-                  padding: "1.5rem",
+                  padding: "1.25rem 1.5rem",
                   backgroundColor: "var(--background)",
                   border: "1px solid var(--border)",
                 }}
@@ -487,12 +492,12 @@ export default function Calculator() {
                 <p
                   style={{
                     fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.62rem",
+                    fontSize: "0.6rem",
                     fontWeight: 700,
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
                     color: "var(--muted)",
-                    marginBottom: "0.6rem",
+                    marginBottom: "0.5rem",
                   }}
                 >
                   Agencia tradicional cobra desde
@@ -500,34 +505,20 @@ export default function Calculator() {
                 <p
                   style={{
                     fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "2.25rem",
+                    fontSize: "2rem",
                     fontWeight: 700,
                     letterSpacing: "-0.04em",
                     color: "var(--text)",
                     lineHeight: 1,
                   }}
                 >
-                  {fmt(agency)}
-                  <span
-                    style={{
-                      fontSize: "0.85rem",
-                      fontWeight: 400,
-                      color: "var(--muted)",
-                      letterSpacing: 0,
-                    }}
-                  >
+                  {fmt(agencyPrice)}
+                  <span style={{ fontSize: "0.82rem", fontWeight: 400, color: "var(--muted)", letterSpacing: 0 }}>
                     /mes
                   </span>
                 </p>
-                <p
-                  style={{
-                    fontSize: "0.72rem",
-                    color: "var(--muted)",
-                    marginTop: "0.5rem",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  + Contratos largos, procesos lentos y poco control sobre los resultados
+                <p style={{ fontSize: "0.7rem", color: "var(--muted)", marginTop: "0.4rem", lineHeight: 1.5 }}>
+                  + Contratos largos, procesos lentos y poco control
                 </p>
               </div>
 
@@ -535,7 +526,7 @@ export default function Calculator() {
               <div
                 style={{
                   borderRadius: "1rem",
-                  padding: "1.5rem",
+                  padding: "1.25rem 1.5rem",
                   backgroundColor: "var(--background)",
                   border: "1px solid var(--border)",
                 }}
@@ -543,12 +534,12 @@ export default function Calculator() {
                 <p
                   style={{
                     fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.62rem",
+                    fontSize: "0.6rem",
                     fontWeight: 700,
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
                     color: "var(--muted)",
-                    marginBottom: "0.6rem",
+                    marginBottom: "0.5rem",
                   }}
                 >
                   Freelancer promedio cobra desde
@@ -556,94 +547,93 @@ export default function Calculator() {
                 <p
                   style={{
                     fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "2.25rem",
+                    fontSize: "2rem",
                     fontWeight: 700,
                     letterSpacing: "-0.04em",
                     color: "var(--text)",
                     lineHeight: 1,
                   }}
                 >
-                  {fmt(freelancer)}
-                  <span
-                    style={{
-                      fontSize: "0.85rem",
-                      fontWeight: 400,
-                      color: "var(--muted)",
-                      letterSpacing: 0,
-                    }}
-                  >
+                  {fmt(freelancerPrice)}
+                  <span style={{ fontSize: "0.82rem", fontWeight: 400, color: "var(--muted)", letterSpacing: 0 }}>
                     /mes
                   </span>
                 </p>
-                <p
-                  style={{
-                    fontSize: "0.72rem",
-                    color: "var(--muted)",
-                    marginTop: "0.5rem",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  + Disponibilidad incierta, sin sistema, sin datos y sin escalabilidad
+                <p style={{ fontSize: "0.7rem", color: "var(--muted)", marginTop: "0.4rem", lineHeight: 1.5 }}>
+                  + Sin sistema, sin datos y sin escalabilidad
                 </p>
               </div>
 
-              {/* PG Estrategias — featured */}
+              {/* PG — featured */}
               <div
                 style={{
                   borderRadius: "1rem",
-                  padding: "1.5rem",
-                  background: `linear-gradient(135deg, var(--accent) 0%, #3D8BBF 100%)`,
+                  padding: "1.25rem 1.5rem",
+                  background: "linear-gradient(135deg, var(--accent) 0%, #3D8BBF 100%)",
                   color: "#ffffff",
                 }}
               >
                 <p
                   style={{
                     fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.62rem",
+                    fontSize: "0.6rem",
                     fontWeight: 700,
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
                     color: "rgba(255,255,255,0.7)",
-                    marginBottom: "0.6rem",
+                    marginBottom: "0.5rem",
                   }}
                 >
-                  Con PG Estrategias
+                  Con PG Estrategias — {plan.nombre}
                 </p>
-                <p
-                  style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "2.75rem",
-                    fontWeight: 700,
-                    letterSpacing: "-0.04em",
-                    color: "#ffffff",
-                    lineHeight: 1,
-                  }}
-                >
-                  {fmt(price)}
-                  <span
+
+                {/* Price breakdown */}
+                <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", flexWrap: "wrap" }}>
+                  <p
                     style={{
-                      fontSize: "0.85rem",
-                      fontWeight: 400,
-                      color: "rgba(255,255,255,0.72)",
-                      letterSpacing: 0,
+                      fontFamily: "var(--font-space-grotesk)",
+                      fontSize: "2.5rem",
+                      fontWeight: 700,
+                      letterSpacing: "-0.04em",
+                      color: "#ffffff",
+                      lineHeight: 1,
                     }}
                   >
-                    /mes
-                  </span>
-                </p>
+                    {fmt(plan.precio)}
+                    <span style={{ fontSize: "0.82rem", fontWeight: 400, color: "rgba(255,255,255,0.72)", letterSpacing: 0 }}>
+                      /mes
+                    </span>
+                  </p>
+                  {plan.pauta && (
+                    <span
+                      style={{
+                        fontFamily: "var(--font-space-grotesk)",
+                        fontSize: "0.75rem",
+                        color: "rgba(255,255,255,0.8)",
+                        backgroundColor: "rgba(255,255,255,0.15)",
+                        padding: "0.2rem 0.6rem",
+                        borderRadius: "9999px",
+                      }}
+                    >
+                      + {fmt(plan.pauta)} pauta
+                    </span>
+                  )}
+                </div>
+
                 <p
                   style={{
-                    fontSize: "0.72rem",
-                    color: "rgba(255,255,255,0.72)",
+                    fontSize: "0.7rem",
+                    color: "rgba(255,255,255,0.7)",
                     marginTop: "0.5rem",
                     lineHeight: 1.5,
-                    marginBottom: "1.25rem",
+                    marginBottom: "1.1rem",
                   }}
                 >
-                  {savings}% menos que una agencia · Sistema completo con datos y método
+                  {savings}% menos que una agencia · Sistema con datos y método
                 </p>
+
                 <a
-                  href={waLink(WA_MESSAGES.hero)}
+                  href={waLink(plan.whatsappMsg)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 font-semibold"
@@ -662,7 +652,7 @@ export default function Calculator() {
                     textDecoration: "none",
                   }}
                 >
-                  Agendar diagnóstico gratuito
+                  Me interesa el {plan.nombre}
                   <span
                     style={{
                       backgroundColor: "#ffffff",
