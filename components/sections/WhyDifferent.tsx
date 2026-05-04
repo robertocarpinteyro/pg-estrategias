@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
-import { capacidades } from "@/lib/data";
-import { BarChart3, Film, Cpu } from "lucide-react";
+import { pilares } from "@/lib/data";
+import { Target, Film, MessageSquare, Globe } from "lucide-react";
 
-const icons = [BarChart3, Film, Cpu];
+const icons = [Target, Film, MessageSquare, Globe];
 
 export default function WhyDifferent() {
   return (
@@ -14,36 +14,37 @@ export default function WhyDifferent() {
       style={{ borderTop: "1px solid var(--border)" }}
     >
       <div className="max-w-7xl mx-auto">
-        {/* 2-col header */}
+        {/* Header row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-14 items-end">
           <FadeIn>
             <span
               style={{
-                fontFamily: "var(--font-space-grotesk)",
+                fontFamily: "var(--font-syne)",
                 fontSize: "0.65rem",
                 fontWeight: 600,
-                letterSpacing: "0.14em",
-                color: "var(--muted)",
+                letterSpacing: "0.16em",
+                color: "#A6E22E",
                 textTransform: "uppercase",
                 display: "block",
                 marginBottom: "0.75rem",
               }}
             >
-              Capacidades
+              Las 4 Columnas
             </span>
             <h2
               className="font-bold uppercase"
               style={{
-                fontFamily: "var(--font-space-grotesk)",
+                fontFamily: "var(--font-syne)",
                 fontSize: "clamp(2rem, 4.5vw, 4rem)",
-                fontWeight: 700,
+                fontWeight: 800,
                 letterSpacing: "-0.03em",
-                lineHeight: 1.0,
-                color: "var(--text)",
+                lineHeight: 0.97,
+                color: "#F5F5F5",
               }}
             >
-              Lo que{" "}
-              <span style={{ color: "var(--accent)" }}>activamos.</span>
+              Cuatro motores.
+              <br />
+              <span style={{ color: "#A6E22E" }}>Un solo sistema.</span>
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}>
@@ -53,105 +54,136 @@ export default function WhyDifferent() {
                 fontSize: "1rem",
                 lineHeight: 1.8,
                 maxWidth: "440px",
+                fontFamily: "var(--font-inter)",
               }}
             >
-              Estrategia, producción y tecnología integradas en un solo motor
-              operado completamente por nuestro equipo.
+              Nuestra ejecución multiplica resultados porque integra cuatro pilares que la mayoría gestiona por separado — o no gestiona.
             </p>
           </FadeIn>
         </div>
 
-        {/* 3 cards — middle is dark */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {capacidades.map((cap, i) => {
+        {/* 4 pillar cards — 2x2 grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {pilares.map((pilar, i) => {
             const Icon = icons[i];
-            const isDark = i === 1;
+            const isAccented = i === 1;
             return (
               <motion.div
-                key={cap.id}
+                key={pilar.id}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.6, delay: i * 0.12 }}
-                className="rounded-2xl"
+                transition={{ duration: 0.6, delay: i * 0.1 }}
                 style={{
-                  padding: "2.25rem 2rem",
-                  backgroundColor: isDark ? "var(--text)" : "transparent",
-                  border: isDark ? "none" : "1px solid var(--border)",
-                  transition: "background-color 0.25s ease",
-                  minHeight: "290px",
+                  padding: "2.25rem 2.25rem 2.5rem",
+                  backgroundColor: isAccented ? "var(--accent-dim)" : "var(--card-bg)",
+                  border: isAccented ? "1px solid var(--accent-border)" : "1px solid var(--border)",
                   display: "flex",
                   flexDirection: "column",
+                  gap: "1.25rem",
+                  transition: "border-color 0.25s ease, background-color 0.25s ease",
+                  cursor: "default",
+                  position: "relative",
+                  overflow: "hidden",
                 }}
                 onMouseEnter={(e) => {
-                  if (!isDark)
-                    (e.currentTarget as HTMLElement).style.backgroundColor =
-                      "var(--card-bg)";
+                  if (!isAccented) {
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(166,226,46,0.2)";
+                    (e.currentTarget as HTMLElement).style.backgroundColor = "var(--card-hover)";
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  if (!isDark)
-                    (e.currentTarget as HTMLElement).style.backgroundColor =
-                      "transparent";
+                  if (!isAccented) {
+                    (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+                    (e.currentTarget as HTMLElement).style.backgroundColor = "var(--card-bg)";
+                  }
                 }}
               >
-                {/* Icon circle */}
-                <div
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "50%",
-                    border: `1.5px solid ${isDark ? "rgba(91,164,207,0.5)" : "var(--accent)"}`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  <Icon
-                    size={20}
-                    strokeWidth={1.8}
-                    style={{ color: "var(--accent)" }}
+                {isAccented && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: "2px",
+                      backgroundColor: "#A6E22E",
+                    }}
                   />
+                )}
+
+                {/* Icon + number row */}
+                <div className="flex items-start justify-between">
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      border: `1.5px solid ${isAccented ? "rgba(166,226,46,0.5)" : "var(--border)"}`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Icon
+                      size={20}
+                      strokeWidth={1.5}
+                      style={{ color: "#A6E22E" }}
+                    />
+                  </div>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-syne)",
+                      fontSize: "0.6rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.14em",
+                      color: isAccented ? "#A6E22E" : "rgba(245,245,245,0.2)",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {pilar.id}
+                  </span>
                 </div>
 
-                <span
-                  style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.6rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.14em",
-                    color: isDark ? "rgba(91,164,207,0.8)" : "var(--accent)",
-                    textTransform: "uppercase",
-                    display: "block",
-                    marginBottom: "0.75rem",
-                  }}
-                >
-                  {cap.id}
-                </span>
-
-                <h3
-                  style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "1.15rem",
-                    fontWeight: 700,
-                    letterSpacing: "-0.02em",
-                    color: isDark ? "#ffffff" : "var(--text)",
-                    marginBottom: "0.75rem",
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {cap.title}
-                </h3>
-
-                <p
-                  style={{
-                    fontSize: "0.82rem",
-                    color: isDark ? "rgba(255,255,255,0.52)" : "var(--muted)",
-                    lineHeight: 1.75,
-                  }}
-                >
-                  {cap.description}
-                </p>
+                {/* Text */}
+                <div>
+                  <span
+                    style={{
+                      display: "block",
+                      fontFamily: "var(--font-syne)",
+                      fontSize: "0.6rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "#A6E22E",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    {pilar.subtitle}
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-syne)",
+                      fontSize: "1.2rem",
+                      fontWeight: 700,
+                      letterSpacing: "-0.02em",
+                      color: "#F5F5F5",
+                      marginBottom: "0.75rem",
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {pilar.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "var(--muted)",
+                      lineHeight: 1.75,
+                      fontFamily: "var(--font-inter)",
+                    }}
+                  >
+                    {pilar.description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}

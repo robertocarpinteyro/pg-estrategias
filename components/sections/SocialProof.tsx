@@ -23,28 +23,26 @@ export default function SocialProof() {
 
   return (
     <section
-      className="py-16 md:py-20"
+      className="py-14 md:py-18"
       style={{ borderTop: "1px solid var(--border)" }}
     >
-      {/* Backed-by row: label + scrolling strip */}
+      {/* Clients strip */}
       <div className="px-5 md:px-8 max-w-7xl mx-auto mb-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
-          {/* Left label */}
           <div>
             <p
               style={{
                 fontFamily: "var(--font-inter)",
-                fontSize: "0.9rem",
-                lineHeight: 1.7,
+                fontSize: "0.85rem",
+                lineHeight: 1.75,
                 color: "var(--muted)",
               }}
             >
-              Confían en nosotros
-              <br />y líderes que ya escalan.
+              Negocios que ya
+              <br />
+              están escalando con PG.
             </p>
           </div>
-
-          {/* Right marquee strip */}
           <div
             className="md:col-span-3 overflow-hidden"
             style={{
@@ -61,21 +59,17 @@ export default function SocialProof() {
                   key={i}
                   className="shrink-0 whitespace-nowrap transition-colors duration-300"
                   style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.82rem",
+                    fontFamily: "var(--font-syne)",
+                    fontSize: "0.75rem",
                     fontWeight: 700,
-                    letterSpacing: "0.06em",
-                    color: "var(--border)",
+                    letterSpacing: "0.1em",
+                    color: "rgba(245,245,245,0.15)",
                     textTransform: "uppercase",
                     marginLeft: "2.5rem",
                     marginRight: "2.5rem",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "var(--text)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "var(--border)")
-                  }
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#A6E22E")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,245,245,0.15)")}
                 >
                   {client.name}
                 </span>
@@ -87,7 +81,7 @@ export default function SocialProof() {
 
       {/* Testimonials */}
       <div className="px-5 md:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
@@ -97,43 +91,75 @@ export default function SocialProof() {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               style={{
                 border: "1px solid var(--border)",
-                borderRadius: "1rem",
                 padding: "2rem",
                 backgroundColor: "var(--card-bg)",
               }}
             >
-              <p
+              {/* Quote mark */}
+              <div
                 style={{
-                  fontSize: "1rem",
-                  color: "var(--text)",
-                  lineHeight: 1.7,
-                  fontStyle: "italic",
-                  marginBottom: "1.5rem",
+                  fontFamily: "var(--font-syne)",
+                  fontSize: "3rem",
+                  lineHeight: 0.8,
+                  color: "#A6E22E",
+                  marginBottom: "1rem",
+                  fontWeight: 800,
                 }}
               >
-                &ldquo;{t.quote}&rdquo;
+                "
+              </div>
+              <p
+                style={{
+                  fontSize: "0.95rem",
+                  color: "#F5F5F5",
+                  lineHeight: 1.75,
+                  marginBottom: "1.75rem",
+                  fontFamily: "var(--font-inter)",
+                }}
+              >
+                {t.quote}
               </p>
-              <div>
-                <p
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  paddingTop: "1rem",
+                  borderTop: "1px solid var(--border)",
+                }}
+              >
+                <div
                   style={{
-                    fontFamily: "var(--font-space-grotesk)",
-                    fontSize: "0.75rem",
-                    fontWeight: 700,
-                    color: "var(--text)",
-                    letterSpacing: "0.02em",
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: "#A6E22E",
+                    flexShrink: 0,
                   }}
-                >
-                  {t.name}
-                </p>
-                <p
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "var(--muted)",
-                    marginTop: "0.2rem",
-                  }}
-                >
-                  {t.business}
-                </p>
+                />
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-syne)",
+                      fontSize: "0.72rem",
+                      fontWeight: 700,
+                      color: "#F5F5F5",
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    {t.name}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "0.65rem",
+                      color: "var(--muted)",
+                      marginTop: "0.15rem",
+                      fontFamily: "var(--font-inter)",
+                    }}
+                  >
+                    {t.business}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

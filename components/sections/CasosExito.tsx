@@ -16,16 +16,16 @@ export default function CasosExito() {
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
 
-        {/* Left — header + secondary cases */}
+        {/* Left */}
         <div className="md:pr-8 md:pt-2">
           <FadeIn>
             <span
               style={{
-                fontFamily: "var(--font-space-grotesk)",
+                fontFamily: "var(--font-syne)",
                 fontSize: "0.65rem",
                 fontWeight: 600,
-                letterSpacing: "0.14em",
-                color: "var(--muted)",
+                letterSpacing: "0.16em",
+                color: "#A6E22E",
                 textTransform: "uppercase",
                 display: "block",
                 marginBottom: "0.75rem",
@@ -36,24 +36,25 @@ export default function CasosExito() {
             <h2
               className="font-bold uppercase mb-5"
               style={{
-                fontFamily: "var(--font-space-grotesk)",
+                fontFamily: "var(--font-syne)",
                 fontSize: "clamp(2.5rem, 5vw, 5rem)",
-                fontWeight: 700,
+                fontWeight: 800,
                 letterSpacing: "-0.04em",
-                lineHeight: 0.95,
-                color: "var(--text)",
+                lineHeight: 0.93,
+                color: "#F5F5F5",
               }}
             >
               Resultados que{" "}
-              <span style={{ color: "var(--accent)" }}>hablan.</span>
+              <span style={{ color: "#A6E22E" }}>hablan.</span>
             </h2>
             <p
               style={{
                 color: "var(--muted)",
                 fontSize: "0.95rem",
-                lineHeight: 1.75,
+                lineHeight: 1.8,
                 maxWidth: "400px",
                 marginBottom: "2.5rem",
+                fontFamily: "var(--font-inter)",
               }}
             >
               Negocios locales que ya están creciendo con el Sistema PG en
@@ -61,8 +62,8 @@ export default function CasosExito() {
             </p>
           </FadeIn>
 
-          {/* Secondary project mini-cards */}
-          <div className="space-y-4">
+          {/* Secondary project cards */}
+          <div className="space-y-3">
             {others.map((project, i) => (
               <motion.div
                 key={project.id}
@@ -73,19 +74,18 @@ export default function CasosExito() {
                 className="group cursor-pointer flex items-center gap-4"
                 style={{
                   border: "1px solid var(--border)",
-                  borderRadius: "1rem",
                   padding: "1rem 1.25rem",
                   backgroundColor: "transparent",
-                  transition: "background-color 0.2s ease",
+                  transition: "background-color 0.2s ease, border-color 0.2s ease",
                 }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.backgroundColor =
-                    "var(--card-bg)")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.backgroundColor =
-                    "transparent")
-                }
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "var(--card-bg)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(166,226,46,0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+                }}
               >
                 {/* Thumbnail */}
                 <div
@@ -93,7 +93,6 @@ export default function CasosExito() {
                   style={{
                     width: "72px",
                     height: "56px",
-                    borderRadius: "0.6rem",
                     backgroundColor: project.color,
                   }}
                 >
@@ -114,11 +113,11 @@ export default function CasosExito() {
                   <span
                     style={{
                       display: "block",
-                      fontFamily: "var(--font-space-grotesk)",
+                      fontFamily: "var(--font-syne)",
                       fontSize: "0.55rem",
                       fontWeight: 600,
-                      letterSpacing: "0.1em",
-                      color: "var(--muted)",
+                      letterSpacing: "0.12em",
+                      color: "#A6E22E",
                       textTransform: "uppercase",
                       marginBottom: "0.2rem",
                     }}
@@ -127,10 +126,10 @@ export default function CasosExito() {
                   </span>
                   <h3
                     style={{
-                      fontFamily: "var(--font-space-grotesk)",
+                      fontFamily: "var(--font-syne)",
                       fontSize: "0.95rem",
                       fontWeight: 700,
-                      color: "var(--text)",
+                      color: "#F5F5F5",
                       letterSpacing: "-0.01em",
                     }}
                   >
@@ -140,7 +139,7 @@ export default function CasosExito() {
 
                 <ArrowRight
                   size={15}
-                  style={{ color: "var(--accent)", flexShrink: 0 }}
+                  style={{ color: "#A6E22E", flexShrink: 0 }}
                 />
               </motion.div>
             ))}
@@ -154,9 +153,8 @@ export default function CasosExito() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.7 }}
           className="relative overflow-hidden"
-          style={{ borderRadius: "1.5rem", minHeight: "680px" }}
+          style={{ minHeight: "660px" }}
         >
-          {/* Video */}
           {featured.video && (
             <video
               src={featured.video}
@@ -168,31 +166,33 @@ export default function CasosExito() {
             />
           )}
 
-          {/* Gradient overlay */}
           <div
             className="absolute inset-0"
             style={{
-              background:
-                "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.12) 55%, transparent 78%)",
+              background: "linear-gradient(to top, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.1) 55%, transparent 78%)",
             }}
           />
 
-          {/* Content */}
+          {/* Top accent bar */}
+          <div
+            className="absolute top-0 left-0 right-0"
+            style={{ height: "2px", backgroundColor: "#A6E22E", zIndex: 1 }}
+          />
+
           <div className="relative z-10 flex flex-col h-full p-10 md:p-12">
             {/* Top badge */}
             <span
               className="self-start"
               style={{
-                fontFamily: "var(--font-space-grotesk)",
+                fontFamily: "var(--font-syne)",
                 fontSize: "0.55rem",
                 fontWeight: 700,
-                letterSpacing: "0.1em",
+                letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.85)",
-                backgroundColor: "rgba(0,0,0,0.28)",
-                backdropFilter: "blur(6px)",
+                color: "#A6E22E",
+                backgroundColor: "rgba(166,226,46,0.12)",
+                border: "1px solid rgba(166,226,46,0.25)",
                 padding: "0.35rem 0.8rem",
-                borderRadius: "9999px",
               }}
             >
               {featured.vertical}
@@ -202,10 +202,10 @@ export default function CasosExito() {
             <div style={{ marginTop: "auto" }}>
               <h3
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
+                  fontFamily: "var(--font-syne)",
                   fontSize: "clamp(2rem, 3.5vw, 3rem)",
-                  fontWeight: 700,
-                  color: "#ffffff",
+                  fontWeight: 800,
+                  color: "#F5F5F5",
                   letterSpacing: "-0.03em",
                   lineHeight: 1.05,
                   marginBottom: "0.6rem",
@@ -215,11 +215,11 @@ export default function CasosExito() {
               </h3>
               <p
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
+                  fontFamily: "var(--font-syne)",
                   fontSize: "0.6rem",
                   fontWeight: 700,
-                  color: "rgba(255,255,255,0.6)",
-                  letterSpacing: "0.08em",
+                  color: "rgba(245,245,245,0.5)",
+                  letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   marginBottom: "1.5rem",
                 }}
@@ -230,25 +230,24 @@ export default function CasosExito() {
                 href="#"
                 className="inline-flex items-center gap-3 font-semibold text-white transition-colors duration-200"
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontSize: "0.85rem",
+                  fontFamily: "var(--font-syne)",
+                  fontSize: "0.82rem",
                   textDecoration: "none",
+                  letterSpacing: "0.04em",
                 }}
               >
                 <span
                   style={{
                     width: "2.5rem",
                     height: "2.5rem",
-                    borderRadius: "9999px",
-                    backgroundColor: "rgba(255,255,255,0.88)",
-                    backdropFilter: "blur(4px)",
+                    backgroundColor: "#A6E22E",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
                   }}
                 >
-                  <ArrowRight size={16} style={{ color: "#1A1A1A" }} />
+                  <ArrowRight size={16} style={{ color: "#0D0D0D" }} />
                 </span>
                 Ver caso
               </a>

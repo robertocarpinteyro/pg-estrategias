@@ -17,60 +17,49 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
-
-  const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
         style={{
-          backgroundColor: scrolled
-            ? "rgba(244,239,232,0.96)"
-            : "transparent",
-          borderBottom: scrolled
-            ? "1px solid rgba(213,206,188,0.6)"
-            : "1px solid transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
+          backgroundColor: scrolled ? "rgba(13,13,13,0.95)" : "transparent",
+          borderBottom: scrolled ? "1px solid rgba(245,245,245,0.07)" : "1px solid transparent",
+          backdropFilter: scrolled ? "blur(16px)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             href="#home"
-            className="flex items-center gap-1 no-underline"
+            className="flex items-center gap-2 no-underline"
             aria-label="PG Estrategias"
           >
+            {/* Bar chart icon */}
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="1" y="12" width="4" height="7" fill="#A6E22E" rx="0.5"/>
+              <rect x="8" y="7" width="4" height="12" fill="#A6E22E" rx="0.5" opacity="0.75"/>
+              <rect x="15" y="2" width="4" height="17" fill="#A6E22E" rx="0.5" opacity="0.5"/>
+            </svg>
             <span
-              className="font-bold text-base tracking-tight leading-none"
+              className="font-bold leading-none"
               style={{
-                fontFamily: "var(--font-space-grotesk)",
-                letterSpacing: "-0.03em",
+                fontFamily: "var(--font-syne)",
+                fontSize: "0.9rem",
+                letterSpacing: "0.06em",
               }}
             >
-              <span style={{ color: "var(--accent)" }}>PG</span>
-              <span style={{ color: scrolled ? "var(--text)" : "#ffffff" }}> ESTRATEGIAS</span>
-            </span>
-            <span
-              className="text-xs align-super"
-              style={{ color: "var(--accent)", fontSize: "0.55rem" }}
-            >
-              ®
+              <span style={{ color: "#A6E22E" }}>PG</span>
+              <span style={{ color: "#F5F5F5" }}> ESTRATEGIAS</span>
             </span>
           </Link>
 
@@ -82,16 +71,12 @@ export default function Navbar() {
                 href={link.href}
                 className="text-xs font-medium uppercase tracking-widest transition-colors duration-200"
                 style={{
-                  color: scrolled ? "var(--muted)" : "rgba(255,255,255,0.7)",
-                  fontFamily: "var(--font-space-grotesk)",
-                  letterSpacing: "0.08em",
+                  color: "rgba(245,245,245,0.5)",
+                  fontFamily: "var(--font-syne)",
+                  letterSpacing: "0.1em",
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = scrolled ? "var(--text)" : "#ffffff")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = scrolled ? "var(--muted)" : "rgba(255,255,255,0.7)")
-                }
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#F5F5F5")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,245,245,0.5)")}
               >
                 {link.label}
               </Link>
@@ -100,19 +85,16 @@ export default function Navbar() {
               href={waLink(WA_MESSAGES.hero)}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-semibold uppercase tracking-widest px-5 py-2.5 rounded-full text-white transition-colors duration-200 cursor-pointer"
+              className="text-xs font-bold uppercase tracking-widest px-5 py-2.5 transition-all duration-200 cursor-pointer"
               style={{
-                backgroundColor: "var(--accent)",
-                fontFamily: "var(--font-space-grotesk)",
-                letterSpacing: "0.05em",
+                backgroundColor: "#A6E22E",
+                color: "#0D0D0D",
+                fontFamily: "var(--font-syne)",
+                letterSpacing: "0.08em",
                 textDecoration: "none",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "var(--accent-hover)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "var(--accent)")
-              }
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#8FC220")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#A6E22E")}
             >
               Contacto
             </a>
@@ -121,28 +103,22 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            className="md:hidden flex items-center gap-1 cursor-pointer p-2 -mr-2"
+            className="md:hidden flex items-center gap-2 cursor-pointer p-2 -mr-2"
             aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={menuOpen}
           >
-            <span
-              className="text-xs font-semibold uppercase tracking-widest mr-1"
-              style={{
-                fontFamily: "var(--font-space-grotesk)",
-                color: scrolled ? "var(--text)" : "#ffffff",
-                letterSpacing: "0.08em",
-              }}
-            >
-              {menuOpen ? "" : "MENU"}
-            </span>
             {menuOpen ? (
-              <X size={18} strokeWidth={1.5} style={{ color: "var(--text)" }} />
+              <X size={20} strokeWidth={1.5} style={{ color: "#F5F5F5" }} />
             ) : (
-              <Menu
-                size={18}
-                strokeWidth={1.5}
-                style={{ color: scrolled ? "var(--text)" : "#ffffff" }}
-              />
+              <>
+                <span
+                  className="text-xs font-bold uppercase tracking-widest"
+                  style={{ fontFamily: "var(--font-syne)", color: "rgba(245,245,245,0.7)", letterSpacing: "0.1em" }}
+                >
+                  MENU
+                </span>
+                <Menu size={18} strokeWidth={1.5} style={{ color: "rgba(245,245,245,0.7)" }} />
+              </>
             )}
           </button>
         </div>
@@ -152,12 +128,12 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
             className="fixed inset-0 z-40 flex flex-col pt-20 px-6 pb-10"
-            style={{ backgroundColor: "var(--background)" }}
+            style={{ backgroundColor: "#0D0D0D" }}
           >
             <nav className="flex flex-col gap-1" aria-label="Menú móvil">
               {navLinks.map((link, i) => (
@@ -169,20 +145,16 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    onClick={closeMenu}
-                    className="block py-4 border-b text-2xl font-bold transition-colors duration-200 cursor-pointer"
+                    onClick={() => setMenuOpen(false)}
+                    className="block py-5 border-b text-3xl font-bold uppercase transition-colors duration-200"
                     style={{
-                      fontFamily: "var(--font-space-grotesk)",
-                      color: "var(--text)",
-                      borderColor: "var(--border)",
+                      fontFamily: "var(--font-syne)",
+                      color: "#F5F5F5",
+                      borderColor: "rgba(245,245,245,0.08)",
                       letterSpacing: "-0.02em",
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = "var(--accent)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = "var(--text)")
-                    }
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#A6E22E")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#F5F5F5")}
                   >
                     {link.label}
                   </Link>
@@ -192,21 +164,23 @@ export default function Navbar() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.06 + 0.1 }}
-                className="mt-6"
+                className="mt-8"
               >
                 <a
                   href={waLink(WA_MESSAGES.hero)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={closeMenu}
-                  className="inline-block px-6 py-3.5 text-sm font-semibold uppercase tracking-widest text-white rounded-full cursor-pointer"
+                  onClick={() => setMenuOpen(false)}
+                  className="inline-block px-7 py-4 text-sm font-bold uppercase tracking-widest cursor-pointer"
                   style={{
-                    backgroundColor: "var(--accent)",
-                    fontFamily: "var(--font-space-grotesk)",
+                    backgroundColor: "#A6E22E",
+                    color: "#0D0D0D",
+                    fontFamily: "var(--font-syne)",
                     textDecoration: "none",
+                    letterSpacing: "0.08em",
                   }}
                 >
-                  Agenda tu diagnóstico gratis →
+                  Agenda tu diagnóstico →
                 </a>
               </motion.div>
             </nav>

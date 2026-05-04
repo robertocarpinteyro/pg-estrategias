@@ -1,542 +1,408 @@
 "use client";
 
-import { useState } from "react";
+import { motion } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
 import { paquetes, waLink, WA_MESSAGES } from "@/lib/data";
-import { Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 
-type Paquete = typeof paquetes[0];
+type Paquete = (typeof paquetes)[0];
 
-function PriceCard({ pkg, delay = 0 }: { pkg: Paquete; delay?: number }) {
-  const [hovered, setHovered] = useState(false);
+function PriceCard({ pkg, index }: { pkg: Paquete; index: number }) {
+  const isFeatured = pkg.destacado;
 
   return (
-    <FadeIn delay={delay}>
-      <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{
-          position: "relative",
-          border: pkg.destacado
-            ? "1.5px solid var(--accent)"
-            : "1px solid var(--border)",
-          borderRadius: "2px",
-          backgroundColor: pkg.destacado
-            ? "var(--card-bg)"
-            : hovered
-            ? "var(--card-bg)"
-            : "transparent",
-          transition: "background-color 0.25s ease",
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          overflow: "hidden",
-        }}
-      >
-        {pkg.destacado && (
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: "2px",
-              backgroundColor: "var(--accent)",
-            }}
-          />
-        )}
-
-        {/* Header */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        position: "relative",
+        overflow: "hidden",
+        border: isFeatured ? "1px solid var(--accent-border)" : "1px solid var(--border)",
+        backgroundColor: isFeatured ? "var(--accent-dim)" : "var(--card-bg)",
+        transition: "border-color 0.25s ease",
+      }}
+      onMouseEnter={(e) => {
+        if (!isFeatured)
+          (e.currentTarget as HTMLElement).style.borderColor = "rgba(166,226,46,0.2)";
+      }}
+      onMouseLeave={(e) => {
+        if (!isFeatured)
+          (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+      }}
+    >
+      {/* Top accent bar */}
+      {isFeatured && (
         <div
           style={{
-            padding: "1.75rem 1.75rem 1.25rem",
-            borderBottom: "1px solid var(--border)",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "3px",
+            backgroundColor: "#A6E22E",
+          }}
+        />
+      )}
+
+      {/* Header */}
+      <div
+        style={{
+          padding: "2rem 2rem 1.5rem",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
+        {/* Plan tier badge */}
+        <div className="flex items-center justify-between mb-4">
+          <span
+            style={{
+              fontFamily: "var(--font-syne)",
+              fontSize: "0.55rem",
+              fontWeight: 700,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: isFeatured ? "#A6E22E" : "var(--muted)",
+              border: `1px solid ${isFeatured ? "var(--accent-border)" : "var(--border)"}`,
+              padding: "0.2rem 0.6rem",
+            }}
+          >
+            {pkg.etiqueta}
+          </span>
+          {isFeatured && (
+            <span
+              style={{
+                fontFamily: "var(--font-syne)",
+                fontSize: "0.55rem",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "#0D0D0D",
+                backgroundColor: "#A6E22E",
+                padding: "0.2rem 0.6rem",
+              }}
+            >
+              Recomendado
+            </span>
+          )}
+        </div>
+
+        {/* Plan name */}
+        <h3
+          style={{
+            fontFamily: "var(--font-syne)",
+            fontSize: "1.6rem",
+            fontWeight: 800,
+            letterSpacing: "-0.02em",
+            color: "#F5F5F5",
+            marginBottom: "0.4rem",
+            lineHeight: 1.1,
           }}
         >
-          {/* Labels row */}
+          {pkg.nombre}
+        </h3>
+        <p
+          style={{
+            fontSize: "0.78rem",
+            color: "var(--muted)",
+            lineHeight: 1.7,
+            marginBottom: "1.5rem",
+            fontFamily: "var(--font-inter)",
+          }}
+        >
+          {pkg.descripcion}
+        </p>
+
+        {/* Price */}
+        <div className="flex items-baseline gap-1 mb-1">
+          <span
+            style={{
+              fontFamily: "var(--font-syne)",
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              color: "var(--muted)",
+            }}
+          >
+            $
+          </span>
+          <span
+            style={{
+              fontFamily: "var(--font-syne)",
+              fontSize: "2.75rem",
+              fontWeight: 800,
+              letterSpacing: "-0.04em",
+              color: "#F5F5F5",
+              lineHeight: 1,
+            }}
+          >
+            {pkg.precio.toLocaleString("es-MX")}
+          </span>
+          <span
+            style={{
+              fontFamily: "var(--font-syne)",
+              fontSize: "0.72rem",
+              color: "var(--muted)",
+            }}
+          >
+            MXN/mes
+          </span>
+        </div>
+
+        {/* Pauta badge */}
+        <div
+          style={{
+            marginTop: "1rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+            padding: "0.65rem 0.85rem",
+            backgroundColor: "rgba(166,226,46,0.07)",
+            border: "1px solid rgba(166,226,46,0.18)",
+          }}
+        >
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              marginBottom: "1rem",
-              flexWrap: "wrap",
+              width: "6px",
+              height: "6px",
+              borderRadius: "50%",
+              backgroundColor: "#A6E22E",
+              flexShrink: 0,
             }}
-          >
-            {pkg.destacado && (
-              <span
-                style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontSize: "0.58rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                  border: "1px solid var(--accent)",
-                  padding: "0.15rem 0.5rem",
-                  borderRadius: "2px",
-                }}
-              >
-                Recomendado
-              </span>
-            )}
-            {pkg.etiqueta && (
-              <span
-                style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontSize: "0.58rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "var(--text)",
-                  backgroundColor: "var(--border)",
-                  padding: "0.15rem 0.5rem",
-                  borderRadius: "2px",
-                }}
-              >
-                {pkg.etiqueta}
-              </span>
-            )}
-          </div>
-
-          {/* Name */}
-          <h3
-            style={{
-              fontFamily: "var(--font-space-grotesk)",
-              fontSize: "1.05rem",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              color: "var(--text)",
-              marginBottom: "0.5rem",
-              lineHeight: 1.2,
-            }}
-          >
-            {pkg.nombre}
-          </h3>
+          />
           <p
             style={{
-              fontSize: "0.75rem",
-              color: "var(--muted)",
-              lineHeight: 1.7,
-              marginBottom: "1.25rem",
+              fontFamily: "var(--font-syne)",
+              fontSize: "0.7rem",
+              fontWeight: 700,
+              color: "#A6E22E",
+              letterSpacing: "0.02em",
             }}
           >
-            {pkg.descripcion}
+            Incluye ${pkg.pauta?.toLocaleString("es-MX")} MXN de pauta
           </p>
+        </div>
 
-          {/* Price */}
-          <div>
-            <div style={{ display: "flex", alignItems: "baseline", gap: "0.3rem" }}>
-              <span
-                style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  color: "var(--muted)",
-                }}
-              >
-                $
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontSize: "2.25rem",
-                  fontWeight: 800,
-                  letterSpacing: "-0.04em",
-                  color: "var(--text)",
-                  lineHeight: 1,
-                }}
-              >
-                {pkg.precio.toLocaleString("es-MX")}
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  fontSize: "0.7rem",
-                  color: "var(--muted)",
-                }}
-              >
-                MXN/mes
-              </span>
-            </div>
-            {pkg.pauta && (
+        {/* Ideal para */}
+        <p
+          style={{
+            marginTop: "1rem",
+            fontSize: "0.68rem",
+            color: "var(--muted)",
+            lineHeight: 1.6,
+            fontFamily: "var(--font-inter)",
+          }}
+        >
+          Ideal para: {pkg.idealPara}
+        </p>
+      </div>
+
+      {/* Features */}
+      <div style={{ padding: "1.5rem 2rem", flex: 1 }}>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+          {pkg.features.map((f, i) => (
+            <li
+              key={i}
+              className="flex items-start gap-3"
+            >
               <div
                 style={{
-                  marginTop: "1rem",
-                  padding: "0.75rem 1rem",
-                  borderRadius: "2px",
-                  background: "linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent), color-mix(in srgb, var(--accent) 6%, transparent))",
-                  border: "1px solid color-mix(in srgb, var(--accent) 35%, transparent)",
+                  width: "18px",
+                  height: "18px",
+                  borderRadius: "50%",
+                  backgroundColor: "rgba(166,226,46,0.12)",
+                  border: "1px solid rgba(166,226,46,0.25)",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "0.75rem",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                  marginTop: "0.1rem",
                 }}
               >
-                <div>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-space-grotesk)",
-                      fontSize: "0.58rem",
-                      fontWeight: 700,
-                      letterSpacing: "0.14em",
-                      textTransform: "uppercase",
-                      color: "var(--accent)",
-                      marginBottom: "0.2rem",
-                    }}
-                  >
-                    Pauta publicitaria incluida
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-space-grotesk)",
-                      fontSize: "1.4rem",
-                      fontWeight: 800,
-                      letterSpacing: "-0.03em",
-                      color: "var(--accent)",
-                      lineHeight: 1,
-                    }}
-                  >
-                    ${pkg.pauta.toLocaleString("es-MX")}
-                    <span style={{ fontSize: "0.7rem", fontWeight: 600, marginLeft: "0.25rem" }}>MXN</span>
-                  </p>
-                </div>
-                <div
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    backgroundColor: "var(--accent)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    <path d="M2 17l10 5 10-5"/>
-                    <path d="M2 12l10 5 10-5"/>
-                  </svg>
-                </div>
+                <Check size={10} strokeWidth={2.5} style={{ color: "#A6E22E" }} />
               </div>
-            )}
-          </div>
-        </div>
-
-        {/* Features */}
-        <div style={{ padding: "1.25rem 1.75rem", flex: 1 }}>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {pkg.features.map((f, i) => (
-              <li
-                key={i}
+              <span
                 style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "0.6rem",
-                  paddingBottom: "0.6rem",
-                  marginBottom: "0.1rem",
-                  borderBottom:
-                    i < pkg.features.length - 1
-                      ? "1px solid var(--border)"
-                      : "none",
+                  fontSize: "0.78rem",
+                  color: "var(--muted)",
+                  lineHeight: 1.65,
+                  fontFamily: "var(--font-inter)",
                 }}
               >
-                <Check
-                  size={11}
-                  strokeWidth={2.5}
-                  style={{
-                    color: "var(--accent)",
-                    flexShrink: 0,
-                    marginTop: "0.2rem",
-                  }}
-                />
-                <span
-                  style={{
-                    fontSize: "0.72rem",
-                    color: "var(--muted)",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {f.label}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Footer */}
-        <div style={{ padding: "1.25rem 1.75rem 1.75rem" }}>
-          {pkg.notas.length > 0 && (
-            <div style={{ marginBottom: "1rem" }}>
-              {pkg.notas.map((nota, i) => (
-                <p
-                  key={i}
-                  style={{
-                    fontSize: "0.62rem",
-                    color: "var(--muted)",
-                    letterSpacing: "0.02em",
-                    lineHeight: 1.6,
-                    opacity: 0.7,
-                  }}
-                >
-                  * {nota}
-                </p>
-              ))}
-            </div>
-          )}
-
-          {/* CTA */}
-          <a
-            href={waLink(pkg.whatsappMsg)}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "block",
-              textAlign: "center",
-              padding: "0.8rem 1rem",
-              fontFamily: "var(--font-space-grotesk)",
-              fontSize: "0.72rem",
-              fontWeight: 700,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              borderRadius: "2px",
-              transition: "all 0.2s ease",
-              backgroundColor: pkg.destacado ? "var(--accent)" : "transparent",
-              color: pkg.destacado ? "#fff" : "var(--text)",
-              border: pkg.destacado
-                ? "1px solid var(--accent)"
-                : "1px solid var(--border)",
-            }}
-            onMouseEnter={(e) => {
-              if (pkg.destacado) {
-                e.currentTarget.style.backgroundColor = "var(--accent-hover)";
-              } else {
-                e.currentTarget.style.borderColor = "var(--accent)";
-                e.currentTarget.style.color = "var(--accent)";
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (pkg.destacado) {
-                e.currentTarget.style.backgroundColor = "var(--accent)";
-              } else {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.color = "var(--text)";
-              }
-            }}
-          >
-            Quiero este plan →
-          </a>
-        </div>
+                {f.label}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
-    </FadeIn>
+
+      {/* CTA */}
+      <div style={{ padding: "1.25rem 2rem 2rem" }}>
+        <a
+          href={waLink(pkg.whatsappMsg)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-between w-full"
+          style={{
+            padding: "0.85rem 1.25rem 0.85rem 1.5rem",
+            fontFamily: "var(--font-syne)",
+            fontSize: "0.75rem",
+            fontWeight: 700,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            backgroundColor: isFeatured ? "#A6E22E" : "transparent",
+            color: isFeatured ? "#0D0D0D" : "#F5F5F5",
+            border: isFeatured ? "1px solid #A6E22E" : "1px solid var(--border)",
+            transition: "all 0.2s ease",
+          }}
+          onMouseEnter={(e) => {
+            if (isFeatured) {
+              e.currentTarget.style.backgroundColor = "#8FC220";
+            } else {
+              e.currentTarget.style.backgroundColor = "var(--accent-dim)";
+              e.currentTarget.style.borderColor = "var(--accent-border)";
+              e.currentTarget.style.color = "#A6E22E";
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (isFeatured) {
+              e.currentTarget.style.backgroundColor = "#A6E22E";
+            } else {
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.borderColor = "var(--border)";
+              e.currentTarget.style.color = "#F5F5F5";
+            }
+          }}
+        >
+          <span>Me interesa este plan</span>
+          <ArrowRight size={15} />
+        </a>
+      </div>
+    </motion.div>
   );
 }
 
 export default function Pricing() {
-  const tier1 = paquetes.filter((p) => p.categoria === "Construir bases");
-  const tier2 = paquetes.filter((p) => p.categoria === "Activar crecimiento");
-
   return (
     <section
       id="planes"
-      className="py-24 md:py-36 px-5 md:px-8 max-w-7xl mx-auto"
+      className="py-24 md:py-36 px-5 md:px-8"
       style={{ borderTop: "1px solid var(--border)" }}
     >
-      {/* Header */}
-      <FadeIn>
-        <div className="flex flex-col md:flex-row md:items-end gap-6 mb-14">
-          <div>
-            <span
-              style={{
-                fontFamily: "var(--font-space-grotesk)",
-                fontSize: "0.65rem",
-                fontWeight: 600,
-                letterSpacing: "0.14em",
-                color: "var(--muted)",
-                textTransform: "uppercase",
-              }}
-            >
-              Nuestros Planes
-            </span>
-            <h2
-              className="font-bold mt-3 uppercase"
-              style={{
-                fontFamily: "var(--font-space-grotesk)",
-                fontSize: "clamp(2rem, 4.5vw, 4rem)",
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-                lineHeight: 1.0,
-                color: "var(--text)",
-              }}
-            >
-              Inversión que
-              <br />
-              <span style={{ color: "var(--accent)" }}>genera retorno.</span>
-            </h2>
-          </div>
-          <p
-            className="md:ml-auto text-sm"
-            style={{
-              color: "var(--muted)",
-              maxWidth: "300px",
-              lineHeight: 1.8,
-            }}
-          >
-            Precios en MXN. Escala a tu ritmo.
-          </p>
-        </div>
-      </FadeIn>
-
-      {/* ── TIER 1: Construir bases ── */}
-      <div className="mb-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <FadeIn>
-          <div
-            style={{
-              marginBottom: "1rem",
-              paddingBottom: "0.75rem",
-              borderBottom: "1px solid var(--border)",
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "var(--font-space-grotesk)",
-                fontSize: "0.7rem",
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                color: "var(--accent)",
-                textTransform: "uppercase",
-                marginBottom: "0.3rem",
-              }}
-            >
-              Tier 1 · Construir bases
-            </p>
-            <p
-              style={{
-                fontSize: "0.75rem",
-                color: "var(--muted)",
-                lineHeight: 1.6,
-              }}
-            >
-              Para negocios que están armando su presencia digital antes de invertir en pauta.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end gap-6 mb-14">
+            <div>
+              <span
+                style={{
+                  fontFamily: "var(--font-syne)",
+                  fontSize: "0.65rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.16em",
+                  color: "#A6E22E",
+                  textTransform: "uppercase",
+                  display: "block",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                Paquetes · Iguala Mensual
+              </span>
+              <h2
+                className="font-bold uppercase"
+                style={{
+                  fontFamily: "var(--font-syne)",
+                  fontSize: "clamp(2rem, 4.5vw, 4rem)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.03em",
+                  lineHeight: 0.97,
+                  color: "#F5F5F5",
+                }}
+              >
+                Inversión que
+                <br />
+                <span style={{ color: "#A6E22E" }}>genera retorno.</span>
+              </h2>
+            </div>
+            <div className="md:ml-auto">
+              <p
+                style={{
+                  color: "var(--muted)",
+                  fontSize: "0.85rem",
+                  lineHeight: 1.8,
+                  maxWidth: "280px",
+                  fontFamily: "var(--font-inter)",
+                }}
+              >
+                Precios en MXN. Compromiso mínimo de 3 meses.
+                Cada plan ya incluye honorarios y pauta base.
+              </p>
+            </div>
           </div>
         </FadeIn>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {tier1.map((pkg, i) => (
-            <PriceCard key={pkg.id} pkg={pkg} delay={i * 0.08} />
-          ))}
-        </div>
-      </div>
 
-      {/* ── TIER 2: Activar crecimiento ── */}
-      <div className="mt-10 mb-4">
-        <FadeIn>
-          <div
-            style={{
-              marginBottom: "1rem",
-              paddingBottom: "0.75rem",
-              borderBottom: "1px solid var(--border)",
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "var(--font-space-grotesk)",
-                fontSize: "0.7rem",
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                color: "var(--accent)",
-                textTransform: "uppercase",
-                marginBottom: "0.3rem",
-              }}
-            >
-              Tier 2 · Activar crecimiento
-            </p>
-            <p
-              style={{
-                fontSize: "0.75rem",
-                color: "var(--muted)",
-                lineHeight: 1.6,
-              }}
-            >
-              Para negocios listos para invertir en pauta y construir un motor de adquisición predecible.
-            </p>
-          </div>
-        </FadeIn>
+        {/* 3-column pricing grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {tier2.map((pkg, i) => (
-            <PriceCard key={pkg.id} pkg={pkg} delay={i * 0.08} />
+          {paquetes.map((pkg, i) => (
+            <PriceCard key={pkg.id} pkg={pkg} index={i} />
           ))}
         </div>
-      </div>
 
-      {/* Bottom note */}
-      <FadeIn delay={0.15}>
-        <div
-          className="mt-12 flex flex-col md:flex-row md:items-center gap-4 md:gap-10"
-          style={{
-            padding: "1.5rem",
-            border: "1px solid var(--border)",
-            borderRadius: "2px",
-            backgroundColor: "var(--card-bg)",
-          }}
-        >
-          <div style={{ flex: 1 }}>
-            <p
-              style={{
-                fontSize: "0.78rem",
-                color: "var(--muted)",
-                lineHeight: 1.8,
-              }}
-            >
-              Los planes avanzados incluyen un piso de pauta gestionado por nosotros.
-              Si quieres invertir más para acelerar resultados, lo agregamos sobre la base.
-            </p>
-            <p
-              style={{
-                fontSize: "0.78rem",
-                color: "var(--muted)",
-                lineHeight: 1.8,
-                marginTop: "0.5rem",
-              }}
-            >
-              <strong style={{ color: "var(--text)", fontWeight: 600 }}>
-                ¿No estás seguro cuál te corresponde?
-              </strong>{" "}
-              Agenda tu diagnóstico gratuito.
-            </p>
-          </div>
-          <a
-            href={waLink(WA_MESSAGES.faq)}
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Bottom note */}
+        <FadeIn delay={0.2}>
+          <div
+            className="mt-8 flex flex-col md:flex-row md:items-center gap-5"
             style={{
-              flexShrink: 0,
-              display: "inline-block",
-              padding: "0.8rem 1.5rem",
-              fontFamily: "var(--font-space-grotesk)",
-              fontSize: "0.72rem",
-              fontWeight: 700,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              backgroundColor: "var(--accent)",
-              color: "#fff",
-              borderRadius: "2px",
-              transition: "background-color 0.2s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "var(--accent-hover)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "var(--accent)";
+              padding: "1.5rem 2rem",
+              border: "1px solid var(--border)",
+              backgroundColor: "var(--card-bg)",
             }}
           >
-            Agendar diagnóstico →
-          </a>
-        </div>
-      </FadeIn>
+            <div style={{ flex: 1 }}>
+              <p
+                style={{
+                  fontSize: "0.82rem",
+                  color: "var(--muted)",
+                  lineHeight: 1.8,
+                  fontFamily: "var(--font-inter)",
+                }}
+              >
+                Los planes incluyen un piso de pauta gestionado por nosotros. Si quieres invertir más para acelerar, lo sumamos sobre la base.{" "}
+                <strong style={{ color: "#F5F5F5", fontWeight: 600 }}>
+                  ¿No sabes cuál te corresponde?
+                </strong>{" "}
+                Agenda tu diagnóstico gratuito.
+              </p>
+            </div>
+            <a
+              href={waLink(WA_MESSAGES.faq)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 shrink-0"
+              style={{
+                padding: "0.8rem 1.5rem",
+                fontFamily: "var(--font-syne)",
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                backgroundColor: "#A6E22E",
+                color: "#0D0D0D",
+                transition: "background-color 0.2s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#8FC220")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#A6E22E")}
+            >
+              Agendar diagnóstico
+              <ArrowRight size={14} />
+            </a>
+          </div>
+        </FadeIn>
+      </div>
     </section>
   );
 }

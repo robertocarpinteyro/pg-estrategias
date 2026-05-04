@@ -3,10 +3,11 @@ import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import SocialProof from "@/components/sections/SocialProof";
 import Problem from "@/components/sections/Problem";
-import SistemaPG from "@/components/sections/SistemaPG";
 import WhyDifferent from "@/components/sections/WhyDifferent";
+import SistemaPG from "@/components/sections/SistemaPG";
 import CasosExito from "@/components/sections/CasosExito";
-import Calculator from "@/components/sections/Calculator";
+import Pricing from "@/components/sections/Pricing";
+import Garantia from "@/components/sections/Garantia";
 import FAQ from "@/components/sections/FAQ";
 import CTAFinal from "@/components/sections/CTAFinal";
 
@@ -18,10 +19,11 @@ export default function Home() {
         <Hero />
         <SocialProof />
         <Problem />
-        <SistemaPG />
         <WhyDifferent />
+        <SistemaPG />
         <CasosExito />
-        <Calculator />
+        <Pricing />
+        <Garantia />
         <FAQ />
         <CTAFinal />
       </main>

@@ -20,19 +20,14 @@ function getRecommendedIndex(
   mensajeria: boolean,
   reunion: Reunion
 ): number {
-  if (pauta === "pauta-avanzada") return 4; // Dominio
-  if (pauta === "pauta-basica") {
-    if (piezas >= 16 || mensajeria) return 3; // Aceleración
-    return 2; // Tracción
-  }
-  // Tier 1 — sin pauta
-  if (branding || piezas >= 15 || reunion === "quincenal") return 1; // Cimiento Plus
-  return 0; // Cimiento
+  if (pauta === "pauta-avanzada" || piezas >= 18 || (mensajeria && reunion === "quincenal")) return 2; // Dominio
+  if (pauta === "pauta-basica" || piezas >= 14 || mensajeria || reunion === "quincenal") return 1; // Tracción
+  return 0; // Ignición
 }
 
 // Comparison reference prices (approximate market rates)
-const agencyEstimates = [18000, 24000, 28000, 38000, 65000];
-const freelancerEstimates = [11000, 15000, 18000, 24000, 42000];
+const agencyEstimates = [22000, 32000, 65000];
+const freelancerEstimates = [14000, 20000, 40000];
 
 const fmt = (n: number) => "$" + n.toLocaleString("es-MX");
 
@@ -116,7 +111,7 @@ export default function Calculator() {
         <div className="text-center mb-14">
           <span
             style={{
-              fontFamily: "var(--font-space-grotesk)",
+              fontFamily: "var(--font-syne)",
               fontSize: "0.65rem",
               fontWeight: 600,
               letterSpacing: "0.14em",
@@ -129,7 +124,7 @@ export default function Calculator() {
           <h2
             className="font-bold uppercase mt-3"
             style={{
-              fontFamily: "var(--font-space-grotesk)",
+              fontFamily: "var(--font-syne)",
               fontSize: "clamp(2rem, 4.5vw, 4rem)",
               fontWeight: 700,
               letterSpacing: "-0.03em",
@@ -167,7 +162,7 @@ export default function Calculator() {
             <div style={{ paddingBottom: "2rem", borderBottom: "1px solid #1E1E1E" }}>
               <h3
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
+                  fontFamily: "var(--font-syne)",
                   fontSize: "0.88rem",
                   fontWeight: 600,
                   color: "#ffffff",
@@ -205,7 +200,7 @@ export default function Calculator() {
                     <div>
                       <p
                         style={{
-                          fontFamily: "var(--font-space-grotesk)",
+                          fontFamily: "var(--font-syne)",
                           fontSize: "0.88rem",
                           fontWeight: 600,
                           color: pauta === opt.value ? "#ffffff" : "#777777",
@@ -241,7 +236,7 @@ export default function Calculator() {
             >
               <h3
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
+                  fontFamily: "var(--font-syne)",
                   fontSize: "0.88rem",
                   fontWeight: 600,
                   color: "#ffffff",
@@ -279,10 +274,10 @@ export default function Calculator() {
                   marginTop: "0.6rem",
                 }}
               >
-                <span style={{ fontFamily: "var(--font-space-grotesk)", fontSize: "0.62rem", color: "#444444" }}>
+                <span style={{ fontFamily: "var(--font-syne)", fontSize: "0.62rem", color: "#444444" }}>
                   10 piezas
                 </span>
-                <span style={{ fontFamily: "var(--font-space-grotesk)", fontSize: "0.62rem", color: "#444444" }}>
+                <span style={{ fontFamily: "var(--font-syne)", fontSize: "0.62rem", color: "#444444" }}>
                   20 piezas
                 </span>
               </div>
@@ -298,7 +293,7 @@ export default function Calculator() {
             >
               <h3
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
+                  fontFamily: "var(--font-syne)",
                   fontSize: "0.88rem",
                   fontWeight: 600,
                   color: "#ffffff",
@@ -332,7 +327,7 @@ export default function Calculator() {
                     <Checkbox checked={item.checked} />
                     <span
                       style={{
-                        fontFamily: "var(--font-space-grotesk)",
+                        fontFamily: "var(--font-syne)",
                         fontSize: "0.85rem",
                         color: item.checked ? "#ffffff" : "#777777",
                         flex: 1,
@@ -351,7 +346,7 @@ export default function Calculator() {
             <div style={{ paddingTop: "2rem" }}>
               <h3
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
+                  fontFamily: "var(--font-syne)",
                   fontSize: "0.88rem",
                   fontWeight: 600,
                   color: "#ffffff",
@@ -376,7 +371,7 @@ export default function Calculator() {
                     <div>
                       <p
                         style={{
-                          fontFamily: "var(--font-space-grotesk)",
+                          fontFamily: "var(--font-syne)",
                           fontSize: "0.88rem",
                           fontWeight: 600,
                           color: reunion === opt.value ? "#ffffff" : "#777777",
@@ -409,7 +404,7 @@ export default function Calculator() {
             <div style={{ marginBottom: "1.75rem" }}>
               <p
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
+                  fontFamily: "var(--font-syne)",
                   fontSize: "0.62rem",
                   fontWeight: 700,
                   letterSpacing: "0.1em",
@@ -422,7 +417,7 @@ export default function Calculator() {
               </p>
               <h3
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
+                  fontFamily: "var(--font-syne)",
                   fontSize: "1.5rem",
                   fontWeight: 700,
                   letterSpacing: "-0.03em",
@@ -491,7 +486,7 @@ export default function Calculator() {
               >
                 <p
                   style={{
-                    fontFamily: "var(--font-space-grotesk)",
+                    fontFamily: "var(--font-syne)",
                     fontSize: "0.6rem",
                     fontWeight: 700,
                     letterSpacing: "0.1em",
@@ -504,7 +499,7 @@ export default function Calculator() {
                 </p>
                 <p
                   style={{
-                    fontFamily: "var(--font-space-grotesk)",
+                    fontFamily: "var(--font-syne)",
                     fontSize: "2rem",
                     fontWeight: 700,
                     letterSpacing: "-0.04em",
@@ -533,7 +528,7 @@ export default function Calculator() {
               >
                 <p
                   style={{
-                    fontFamily: "var(--font-space-grotesk)",
+                    fontFamily: "var(--font-syne)",
                     fontSize: "0.6rem",
                     fontWeight: 700,
                     letterSpacing: "0.1em",
@@ -546,7 +541,7 @@ export default function Calculator() {
                 </p>
                 <p
                   style={{
-                    fontFamily: "var(--font-space-grotesk)",
+                    fontFamily: "var(--font-syne)",
                     fontSize: "2rem",
                     fontWeight: 700,
                     letterSpacing: "-0.04em",
@@ -575,7 +570,7 @@ export default function Calculator() {
               >
                 <p
                   style={{
-                    fontFamily: "var(--font-space-grotesk)",
+                    fontFamily: "var(--font-syne)",
                     fontSize: "0.6rem",
                     fontWeight: 700,
                     letterSpacing: "0.1em",
@@ -591,7 +586,7 @@ export default function Calculator() {
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", flexWrap: "wrap" }}>
                   <p
                     style={{
-                      fontFamily: "var(--font-space-grotesk)",
+                      fontFamily: "var(--font-syne)",
                       fontSize: "2.5rem",
                       fontWeight: 700,
                       letterSpacing: "-0.04em",
@@ -607,7 +602,7 @@ export default function Calculator() {
                   {plan.pauta && (
                     <span
                       style={{
-                        fontFamily: "var(--font-space-grotesk)",
+                        fontFamily: "var(--font-syne)",
                         fontSize: "0.75rem",
                         color: "rgba(255,255,255,0.8)",
                         backgroundColor: "rgba(255,255,255,0.15)",
@@ -638,7 +633,7 @@ export default function Calculator() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 font-semibold"
                   style={{
-                    fontFamily: "var(--font-space-grotesk)",
+                    fontFamily: "var(--font-syne)",
                     fontSize: "0.82rem",
                     color: "#ffffff",
                     backgroundColor: "rgba(255,255,255,0.18)",
