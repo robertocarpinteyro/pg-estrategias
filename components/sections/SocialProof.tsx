@@ -3,18 +3,23 @@
 import { motion } from "framer-motion";
 import { clients } from "@/lib/data";
 
+const stats = [
+  { value: "10+", label: "Negocios activamente creciendo" },
+  { value: "3.8x", label: "Retorno promedio de inversión" },
+];
+
 const testimonials = [
   {
     quote:
-      "PG Estrategias nos diseñó un sistema que realmente genera clientes. No métricas vacías — contratos firmados.",
-    name: "Cliente Verificado",
-    business: "Sector Automotriz",
+      "Sé que ustedes son un negocio confiable, en el que les interesa que sus clientes crezcan para que ustedes también crezcan.",
+    name: "Dr. José Manuel Fernández",
+    business: "Proctología · Puebla",
   },
   {
     quote:
-      "Antes pagábamos agencia y no veíamos retorno. Con PG, nuestro WhatsApp no deja de sonar con prospectos reales.",
-    name: "Cliente Verificado",
-    business: "Restaurante en Puebla",
+      "Hemos triplicado el número de contratos firmados.",
+    name: "Ex Hacienda de San Bartolo",
+    business: "Bienes Raíces · Puebla",
   },
 ];
 
@@ -76,6 +81,52 @@ export default function SocialProof() {
               ))}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Key stats */}
+      <div className="px-5 md:px-8 max-w-7xl mx-auto mb-14">
+        <div className="grid grid-cols-2 gap-4">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              style={{
+                border: "1px solid var(--border)",
+                padding: "2rem",
+                backgroundColor: "var(--card-bg)",
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "var(--font-syne)",
+                  fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                  fontWeight: 800,
+                  color: "#A6E22E",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1,
+                  display: "block",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                {stat.value}
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "0.8rem",
+                  color: "var(--muted)",
+                  lineHeight: 1.4,
+                }}
+              >
+                {stat.label}
+              </span>
+            </motion.div>
+          ))}
         </div>
       </div>
 

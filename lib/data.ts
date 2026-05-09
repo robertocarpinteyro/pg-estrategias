@@ -16,32 +16,20 @@ export const WA_MESSAGES = {
 export const sistemaPGPhases = [
   {
     id: "01",
-    title: "Diagnóstico",
-    description: "Entendemos el negocio, la oferta, el mercado y los números base.",
-    icon: "search",
-  },
-  {
-    id: "02",
-    title: "Tracción",
-    description: "Anuncios pagados y landing pages para generar demanda medible.",
+    title: "Lanzamos campañas",
+    description: "Diagnóstico, onboarding y primera campaña activa en 14 días. Generamos tráfico calificado desde el día uno.",
     icon: "zap",
   },
   {
-    id: "03",
-    title: "Confianza",
-    description: "Contenido de alta producción y redes que sostienen la decisión de compra.",
-    icon: "shield",
-  },
-  {
-    id: "04",
-    title: "Conversión",
-    description: "Automatización, IA y embudos que convierten interés en cliente.",
+    id: "02",
+    title: "Optimizamos",
+    description: "Analizamos datos reales, ajustamos creatividades y embudos. Cada peso se invierte mejor que el anterior.",
     icon: "target",
   },
   {
-    id: "05",
-    title: "Optimización",
-    description: "Análisis de datos, reseñas y ajuste continuo del sistema.",
+    id: "03",
+    title: "Triplicamos lo invertido",
+    description: "Con el sistema afinado, escalamos resultados. Retorno promedio de 3.8x sobre la inversión publicitaria.",
     icon: "trending-up",
   },
 ];
@@ -114,6 +102,10 @@ export const clients = [
   { name: "Terraza Macarena Querétaro", status: "Activo" },
   { name: "La Marea", status: "Activo" },
   { name: "Doroteo Querétaro", status: "Activo" },
+  { name: "Proctología Puebla", status: "Activo" },
+  { name: "Ex Hacienda de San Bartolo", status: "Activo" },
+  { name: "Restaurante La Noria", status: "Activo" },
+  { name: "Constructora Apex", status: "Activo" },
 ];
 
 export const heroImages = [
@@ -239,7 +231,7 @@ export const faqItems = [
   },
   {
     question: "¿Hay permanencia mínima?",
-    answer: "Sí, todos los planes operan con un compromiso mínimo de 3 meses. Esto nos permite implementar el sistema completo, medir resultados reales y optimizar con datos suficientes.",
+    answer: "Sugerimos un compromiso de 3 meses. El primero lanzamos campañas, el segundo optimizamos y el tercero triplicamos lo invertido. Es el tiempo justo para que el sistema entregue resultados reales.",
   },
   {
     question: "¿Qué pasa si no veo resultados?",

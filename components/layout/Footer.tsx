@@ -79,7 +79,7 @@ export default function Footer() {
                 fontSize: "0.72rem",
               }}
             >
-              Calle Valencia 131-2 Las Palmas, Puebla
+              Ciudad de Puebla, México
             </p>
 
             <a

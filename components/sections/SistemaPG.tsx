@@ -1,14 +1,12 @@
 "use client";
 
-import { ArrowRight, Search, Zap, Shield, Target, TrendingUp } from "lucide-react";
+import { ArrowRight, Zap, Target, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
 import { sistemaPGPhases, waLink, WA_MESSAGES } from "@/lib/data";
 
-const iconMap: Record<string, typeof Search> = {
-  search: Search,
+const iconMap: Record<string, typeof Zap> = {
   zap: Zap,
-  shield: Shield,
   target: Target,
   "trending-up": TrendingUp,
 };
@@ -55,10 +53,10 @@ export default function SistemaPG() {
                 color: "#F5F5F5",
               }}
             >
-              Sistema PG:{" "}
-              <span style={{ color: "#A6E22E" }}>el motor</span>
+              3 meses.{" "}
+              <span style={{ color: "#A6E22E" }}>Un sistema.</span>
               <br />
-              de crecimiento.
+              Resultados reales.
             </h2>
 
             <a
@@ -108,9 +106,8 @@ export default function SistemaPG() {
                 fontFamily: "var(--font-inter)",
               }}
             >
-              Cinco fases integradas que diseñamos, activamos y optimizamos en
-              paralelo para convertir tu inversión en clientes reales y
-              crecimiento sostenido.
+              Tres meses es lo que necesitamos para transformar tu inversión
+              publicitaria en un motor de crecimiento predecible y sostenido.
             </p>
           </FadeIn>
         </div>
@@ -177,7 +174,7 @@ export default function SistemaPG() {
                     textTransform: "uppercase",
                   }}
                 >
-                  Fase {first.id}
+                  Mes {first.id}
                 </span>
               </div>
               <div className="mt-8">
@@ -273,7 +270,7 @@ export default function SistemaPG() {
                       textTransform: "uppercase",
                     }}
                   >
-                    Fase {phase.id}
+                    Mes {phase.id}
                   </span>
                 </div>
                 <div>
@@ -319,9 +316,9 @@ export default function SistemaPG() {
               textAlign: "center",
             }}
           >
-            Cinco fases que se ejecutan en paralelo, no en cascada.{" "}
+            Compromiso sugerido de 3 meses.{" "}
             <span style={{ color: "#F5F5F5", fontWeight: 600 }}>
-              Cada una alimenta a la siguiente.
+              Lo suficiente para ver resultados reales y escalar.
             </span>
           </p>
         </FadeIn>

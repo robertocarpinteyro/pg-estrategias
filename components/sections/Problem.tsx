@@ -223,7 +223,7 @@ export default function Problem() {
                 maxWidth: "480px",
               }}
             >
-              Dejas de coordinar proveedores distintos. Nosotros somos responsables del embudo completo — desde el primer clic hasta el cliente convertido.
+              Del primer click, al cliente recurrente en el segundo mes. Nosotros somos responsables del embudo completo.
             </p>
           </div>
         </FadeIn>

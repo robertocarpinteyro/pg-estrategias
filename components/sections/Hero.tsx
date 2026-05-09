@@ -110,12 +110,12 @@ export default function Hero() {
               maxWidth: "920px",
             }}
           >
-            Tu equipo interno
+            Del primer click
             <br />
-            de{" "}
-            <span style={{ color: "#A6E22E" }}>crecimiento</span>
+            al{" "}
+            <span style={{ color: "#A6E22E" }}>cliente recurrente</span>
             <br />
-            digital.
+            en el segundo mes.
           </motion.h1>
 
           {/* Subtext */}
@@ -133,7 +133,7 @@ export default function Hero() {
             }}
           >
             Convertimos tu inversión publicitaria en clientes reales, no en likes.
-            Integramos pauta, creatividad, conversación y ecosistema digital bajo un mismo motor.
+            Compromiso sugerido de 3 meses — lo suficiente para ver resultados reales.
           </motion.p>
 
           {/* CTAs */}
