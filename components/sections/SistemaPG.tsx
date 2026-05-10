@@ -106,8 +106,8 @@ export default function SistemaPG() {
                 fontFamily: "var(--font-inter)",
               }}
             >
-              Tres meses es lo que necesitamos para transformar tu inversión
-              publicitaria en un motor de crecimiento predecible y sostenido.
+              El primer mes lanzamos campañas, el segundo optimizamos y el tercero
+              triplicamos lo invertido.
             </p>
           </FadeIn>
         </div>
@@ -316,9 +316,10 @@ export default function SistemaPG() {
               textAlign: "center",
             }}
           >
-            Compromiso sugerido de 3 meses.{" "}
+            El primer mes lanzamos campañas, el segundo optimizamos y el tercero
+            triplicamos lo invertido.{" "}
             <span style={{ color: "#F5F5F5", fontWeight: 600 }}>
-              Lo suficiente para ver resultados reales y escalar.
+              Compromiso sugerido de 3 meses.
             </span>
           </p>
         </FadeIn>

@@ -132,8 +132,8 @@ export default function Hero() {
               fontFamily: "var(--font-inter)",
             }}
           >
-            Convertimos tu inversión publicitaria en clientes reales, no en likes.
-            Compromiso sugerido de 3 meses — lo suficiente para ver resultados reales.
+            El primer mes lanzamos campañas, el segundo optimizamos y el tercero
+            triplicamos lo invertido. Compromiso sugerido de 3 meses.
           </motion.p>
 
           {/* CTAs */}
